@@ -3,7 +3,9 @@
 ### Next.js + TailwindCSS
 
 - [x] TailwindCSS Setup
-- [ ] Figma Layout Design
+- [x] Figma Layout Design
+- [x] HTML Main Layout
+- [ ] HTML Side Bar
 - [ ] Theme/Font(INTEL) Setup
 - [ ] DOM Setup
 - [ ] Responsive Design (mobile first)
