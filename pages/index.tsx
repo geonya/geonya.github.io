@@ -1,4 +1,6 @@
 import type { NextPage } from 'next'
+import SideBar from '../components/SideBar'
+import SubSideBar from '../components/SubSideBar'
 import { useMenuContext } from '../lib/MenuContext'
 
 const Home: NextPage = () => {
@@ -8,10 +10,10 @@ const Home: NextPage = () => {
 			{menuContext?.menuShowing && (
 				<>
 					<div className="col-span-2 border-r border-gray-800">
-						<div>Side Menu</div>
+						<SideBar />
 					</div>
 					<div className="col-span-2 full border-r border-gray-800">
-						<div>Sub Side Menu</div>
+						<SubSideBar />
 					</div>
 				</>
 			)}

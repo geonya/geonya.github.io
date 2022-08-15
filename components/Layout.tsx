@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
-import metaData from '../../data/metaData'
-import { useMenuContext } from '../../lib/MenuContext'
+import metaData from '../data/metaData'
+import { useMenuContext } from '../lib/MenuContext'
 
 interface LayoutProps {
 	children: React.ReactNode
