@@ -1,11 +1,15 @@
-import { notesData } from '../data/notebooksData'
+import Link from 'next/link'
 
 export default function SubSideBar() {
 	return (
-		<div>
-			{notesData.map((note, i) => (
-				<div key={i}>{note.title}</div>
+		<ul className="full">
+			{[].map((note, i) => (
+				<li key={i} className="cursor-pointer">
+					<Link href={`/notes/${note}`}>
+						<a className="text-xs font-thin">{note}</a>
+					</Link>
+				</li>
 			))}
-		</div>
+		</ul>
 	)
 }

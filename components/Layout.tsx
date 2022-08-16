@@ -1,19 +1,22 @@
 import { NextPage } from 'next'
 import metaData from '../data/metaData'
-import { useMenuContext } from '../lib/MenuContext'
+import { useSideBarContext } from '../lib/SideBarContext'
+import SideBar from './SideBar'
+import SubSideBar from './SubSideBar'
 
 interface LayoutProps {
 	children: React.ReactNode
 }
+
 const Layout: NextPage<LayoutProps> = ({ children }) => {
-	const menuContext = useMenuContext()
+	const sideBarContext = useSideBarContext()
 	return (
 		<div className="h-screen bg-cover bg-center bg-no-repeat bg-base_bg flex items-center">
 			<div className="full max-h-[800px] mx-auto sm:max-w-screen-sm md:max-screen-md lg:max-w-screen-md xl:max-w-screen-xl grid grid-rows-[50px_1fr_25px] shadow-2xl dark:bg-gray-700/[0.9] backdrop-blur-md dark:text-white font-thin rounded-lg border dark:border-gray-800">
-				<header className="full grid grid-cols-[50px_1fr_1fr_1fr] px-1 border-gray-800 border-b">
+				<header className="full grid grid-cols-[50px_1fr_1fr] sm:grid-cols-[50px_1fr_1fr_1fr] px-1 border-gray-800 border-b">
 					<div className="grid place-content-center">
 						<span
-							onClick={menuContext?.toggleMenu}
+							onClick={sideBarContext?.toggleSideBar}
 							className="text-lg p-2 cursor-pointer"
 						>
 							ㅁ
@@ -36,7 +39,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
 							</label>
 						</form>
 					</div>
-					<div className="full flex items-center justify-around">
+					<div className="full hidden sm:flex items-center justify-around">
 						<div className="space-x-2">
 							<span>🗓/</span>
 							<span>🕐</span>
@@ -45,7 +48,20 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
 						<h4>08:48</h4>
 					</div>
 				</header>
-				<main className="full">{children}</main>
+				<main className="full flex relative">
+					{/* Side Bar */}
+					{sideBarContext?.sideBarShowing && (
+						<div className="flex h-full absolute sm:static sm:top-0 sm:left-0 bg-gray-800 backdrop-blur-md">
+							<div className="w-24 sm:w-52 border-r border-gray-800">
+								<SideBar />
+							</div>
+							<div className="w-32 sm:w-52 border-r border-gray-800">
+								<SubSideBar />
+							</div>
+						</div>
+					)}
+					<div className="w-full">{children}</div>
+				</main>
 				<footer className="full grid place-content-center border-gray-800 border-t">
 					<span className="text-sm">this is status bar.</span>
 				</footer>

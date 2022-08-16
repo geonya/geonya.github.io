@@ -1,13 +1,4 @@
-interface INoteBooksData {
-	id: string
+export interface INotebook {
 	title: string
-	notes: string[]
-}
-
-interface INotesData {
-	id: string
-	notebookId: string
-	title: string
-	createdAt: string
-	tags: string[]
+	slug: string
 }

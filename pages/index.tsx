@@ -1,25 +1,32 @@
-import type { NextPage } from 'next'
-import SideBar from '../components/SideBar'
-import SubSideBar from '../components/SubSideBar'
-import { useMenuContext } from '../lib/MenuContext'
+import { promises as fs } from 'fs'
+import type { GetStaticProps, NextPage } from 'next'
+import path from 'path'
+import { useEffect } from 'react'
+import { useSideBarContext } from '../lib/SideBarContext'
+import { INotebook } from '../types/types'
 
-const Home: NextPage = () => {
-	const menuContext = useMenuContext()
-	return (
-		<div className="full grid grid-cols-10">
-			{menuContext?.menuShowing && (
-				<>
-					<div className="col-span-2 border-r border-gray-800">
-						<SideBar />
-					</div>
-					<div className="col-span-2 full border-r border-gray-800">
-						<SubSideBar />
-					</div>
-				</>
-			)}
-			<div className="full">Content</div>
-		</div>
-	)
+interface HomeProps {
+	notebooks: INotebook[]
+}
+export const getStaticProps: GetStaticProps = async () => {
+	const notebooksDir = path.join(process.cwd(), 'data/notebooks')
+	const notebooksSlug = await fs.readdir(notebooksDir)
+	const notebooks = notebooksSlug.map((slug) => ({
+		title: slug.replace('-', ' '),
+		slug
+	}))
+	return {
+		props: {
+			notebooks
+		}
+	}
+}
+const Home: NextPage<HomeProps> = ({ notebooks }) => {
+	const sideBarContext = useSideBarContext()
+	useEffect(() => {
+		sideBarContext?.saveNotebooks(notebooks)
+	}, [notebooks, sideBarContext])
+	return <div className="full">Index Page</div>
 }
 
 export default Home
