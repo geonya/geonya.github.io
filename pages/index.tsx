@@ -1,19 +1,19 @@
 import type { GetStaticProps } from 'next'
-import { INoteData } from '../types/types'
-import getTotalData from '../lib/getTotalData'
-import useSaveTotalData from '../hooks/useSaveTotalData'
+import useSaveTotalNotes from '../hooks/useSaveTotalNotes'
+import getTotalNotes from '../lib/getTotalNotes'
+import { INote } from '../types/types'
 interface Homeprops {
-  totalData: INoteData[]
+  totalNotes: INote[]
 }
 export const getStaticProps: GetStaticProps = () => {
   return {
     props: {
-      totalData: getTotalData(),
+      totalNotes: getTotalNotes(),
     },
   }
 }
-const Home = ({ totalData }: Homeprops) => {
-  useSaveTotalData(totalData)
+const Home = ({ totalNotes }: Homeprops) => {
+  useSaveTotalNotes(totalNotes)
   return <div className='full'>Index Page</div>
 }
 

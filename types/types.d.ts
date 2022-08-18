@@ -3,17 +3,9 @@ export interface Tag {
   slug: string
 }
 
-export interface INoteData {
-  notebook: INotebook
-  notes: INote[]
-}
-
-export interface INotebook {
-  title: string
-  slug: string
-}
 export interface INote {
   title: string
   slug: string
+  notebook: string
   tag?: Tag[]
 }

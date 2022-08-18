@@ -1,12 +1,12 @@
 import { useNoteContext } from '../context/NoteContext'
-import { INote, INotebook } from '../types/types'
+import { INote } from '../types/types'
 
-export default function useGetNotes(notebook: INotebook | null): INote[] {
-  const { totalData } = useNoteContext()
+export default function useGetNotes(notebook: string | null): INote[] {
+  const { totalNotes } = useNoteContext()
   if (!notebook) return []
-  const noteData = totalData.filter(
-    (data) => data.notebook.title === notebook.title,
-  )[0]
-  const { notes } = noteData
+  if (notebook === 'All') {
+    return totalNotes
+  }
+  const notes = totalNotes.filter((note) => note.notebook === notebook)
   return notes
 }

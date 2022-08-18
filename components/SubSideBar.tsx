@@ -8,7 +8,7 @@ export default function SubSideBar() {
   return (
     <>
       <div className='flex justify-between'>
-        <h1>{currentNotebook?.title}</h1>
+        <h1>{currentNotebook}</h1>
         <div
           onClick={() => saveCurrentNotebook(null)}
           className='p-1 cursor-pointer'
@@ -18,12 +18,7 @@ export default function SubSideBar() {
       </div>
       <ul className='full'>
         {notes.map((note, i) => (
-          <Link
-            key={i}
-            href={`/notes/${currentNotebook?.title.replace(' ', '-')}/${
-              note.slug
-            }`}
-          >
+          <Link key={i} href={`/notes/${note.slug}`}>
             <li className='cursor-pointer'>
               <a className='text-xs font-thin'>{note.title}</a>
             </li>

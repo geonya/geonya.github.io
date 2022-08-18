@@ -1,11 +1,11 @@
 import { createContext, ReactNode, useContext, useState } from 'react'
-import { INotebook, INoteData } from '../types/types'
+import { INote } from '../types/types'
 interface INoteContext {
-  totalData: INoteData[]
-  saveTotalData: (data: INoteData[]) => void
+  totalNotes: INote[]
+  saveTotalNotes: (notes: INote[]) => void
 
-  currentNotebook: INotebook | null
-  saveCurrentNotebook: (notebook: INotebook | null) => void
+  currentNotebook: string | null
+  saveCurrentNotebook: (notebook: string | null) => void
 }
 interface NoteContextProviderProps {
   children: ReactNode
@@ -18,17 +18,16 @@ export const useNoteContext = () => useContext(NoteContext)
 export default function NoteContextProvider({
   children,
 }: NoteContextProviderProps) {
-  const [currentNotebook, setCurrentNoteBook] = useState<INotebook | null>(null)
-  const [totalData, settotalData] = useState<INoteData[]>([])
-
-  const saveCurrentNotebook = (notebook: INotebook | null) =>
+  const [currentNotebook, setCurrentNoteBook] = useState<string | null>(null)
+  const [totalNotes, setTotalNotes] = useState<INote[]>([])
+  const saveCurrentNotebook = (notebook: string | null) =>
     setCurrentNoteBook(notebook)
-  const saveTotalData = (data: INoteData[]) => settotalData(data)
+  const saveTotalNotes = (notes: INote[]) => setTotalNotes(notes)
   return (
     <NoteContext.Provider
       value={{
-        totalData,
-        saveTotalData,
+        totalNotes,
+        saveTotalNotes,
         currentNotebook,
         saveCurrentNotebook,
       }}
