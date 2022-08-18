@@ -1,32 +1,29 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
-import path from 'path'
-import fs from 'fs'
 import { useSideBarContext } from '../../lib/SideBarContext'
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import getNotebookTitles from '../../lib/getNotebookTitles'
-type NoteTitlesType = string[]
+import { GetAllNoteBooks } from '../../lib/GetAllNotebooks'
+import { GetNotes } from '../../lib/GetNotes'
+
 interface NoteBookProps {
-  noteTitles: NoteTitlesType
+  noteTitles: string[]
   notebooks: string[]
 }
-
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths = () => {
+  const notebookSlugs = GetAllNoteBooks.getSlugs()
+  const paths = notebookSlugs.map((slug) => ({ params: { notebook: slug } }))
   return {
-    paths: [],
-    fallback: true,
+    paths,
+    fallback: false,
   }
 }
+
 export const getStaticProps: GetStaticProps = async (context) => {
   let noteTitles: string[] = []
-  const notebooks = getNotebookTitles()
+  const notebooks = GetAllNoteBooks.getTitles()
   if (context.params) {
-    const notebookDir = path.join(
-      process.cwd(),
-      `/data/notebooks/${context.params['notebook']}`,
-    )
-    const noteFiles = fs.readdirSync(notebookDir)
-    noteTitles = noteFiles.map((file) => file.replace('.mdx', ''))
+    const notes = new GetNotes(context.params.notebook as string)
+    noteTitles = notes.getTitles()
   }
   return {
     props: {
@@ -47,7 +44,6 @@ const Notebook = ({ noteTitles, notebooks }: NoteBookProps) => {
   if (router.isFallback) {
     return <div>Loading...</div>
   }
-
   return <div></div>
 }
 export default Notebook

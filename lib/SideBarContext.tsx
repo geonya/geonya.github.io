@@ -13,7 +13,7 @@ interface SideBarContextProviderProps {
   children: ReactNode
 }
 
-const SideBarContext = createContext<ISideBarContext | null>(null)
+const SideBarContext = createContext<ISideBarContext>({} as ISideBarContext)
 export const useSideBarContext = () => useContext(SideBarContext)
 export default function SideBarContextProvider({
   children,
@@ -24,7 +24,7 @@ export default function SideBarContextProvider({
   const [notebooks, setNotebooks] = useState<string[]>([])
   const toggleSideBar = () => setSideBarShowing((prev) => !prev)
   const saveCurrentNoteBook = (title: string) => setCurrentNoteBook(title)
-  const saveCurrentNotes = (notes: string[]) => setCurrentNotes(notes)
+  const saveCurrentNotes = (titles: string[]) => setCurrentNotes(titles)
   const saveNotebooks = (titles: string[]) => setNotebooks(titles)
   return (
     <SideBarContext.Provider

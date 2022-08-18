@@ -1,13 +1,14 @@
-import type { GetStaticProps, NextPage } from 'next'
+import type { GetStaticPaths, GetStaticProps } from 'next'
 import { useEffect } from 'react'
-import getNotebookTitles from '../lib/getNotebookTitles'
+import { GetAllNoteBooks } from '../lib/GetAllNotebooks'
+import { GetNotes } from '../lib/GetNotes'
 import { useSideBarContext } from '../lib/SideBarContext'
 
 interface Homeprops {
   notebooks: string[]
 }
 export const getStaticProps: GetStaticProps = () => {
-  const notebooks = getNotebookTitles()
+  const notebooks = GetAllNoteBooks.getTitles()
   return {
     props: {
       notebooks,
