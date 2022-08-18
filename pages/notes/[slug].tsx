@@ -1,8 +1,7 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useEffect } from 'react'
-import { GetAllNoteBooks } from '../../lib/GetAllNotebooks'
-import { GetNotes } from '../../lib/GetNotes'
-import { useSideBarContext } from '../../lib/SideBarContext'
+import { GetNotes } from '../../lib/getNotes'
+import { useSideBarContext } from '../../context/SideBarContext'
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
@@ -19,7 +18,7 @@ export const getStaticPaths: GetStaticPaths = () => {
   const nestedPaths = notebookSlugs.map((notebook) => {
     const notes = new GetNotes(notebook)
     const slugs = notes.getSlug()
-    return slugs.map((slug) => ({ params: { notebook, slug } }))
+    return slugs.map((slug) => ({ params: { slug } }))
   })
   const paths = nestedPaths.flat()
   return {

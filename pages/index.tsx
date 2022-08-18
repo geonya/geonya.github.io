@@ -1,25 +1,29 @@
 import type { GetStaticPaths, GetStaticProps } from 'next'
 import { useEffect } from 'react'
-import { GetAllNoteBooks } from '../lib/GetAllNotebooks'
-import { GetNotes } from '../lib/GetNotes'
-import { useSideBarContext } from '../lib/SideBarContext'
-
+import getAllNotebooks from '../lib/getAllNotebooks'
+import getNotes from '../lib/getNotes'
+import { useSideBarContext } from '../context/SideBarContext'
+import { INoteData } from '../types/types'
 interface Homeprops {
-  notebooks: string[]
+  totalNoteData: INoteData[]
 }
 export const getStaticProps: GetStaticProps = () => {
-  const notebooks = GetAllNoteBooks.getTitles()
+  const allNotebooks = getAllNotebooks()
+  const totalNoteData = allNotebooks.map((notebook) => ({
+    notebook,
+    notes: getNotes(notebook.slug),
+  }))
   return {
     props: {
-      notebooks,
+      totalNoteData,
     },
   }
 }
-const Home = ({ notebooks }: Homeprops) => {
-  const sidebarContext = useSideBarContext()
+const Home = ({ totalNoteData }: Homeprops) => {
+  const { saveTotalNoteData } = useSideBarContext()
   useEffect(() => {
-    sidebarContext?.saveNotebooks(notebooks)
-  }, [sidebarContext, notebooks])
+    saveTotalNoteData(totalNoteData)
+  })
   return <div className='full'>Index Page</div>
 }
 

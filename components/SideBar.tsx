@@ -1,24 +1,20 @@
-import Link from 'next/link'
-import { titleToSlug } from '../lib/changeTitle'
-import { useSideBarContext } from '../lib/SideBarContext'
+import { useSideBarContext } from '../context/SideBarContext'
 
 export default function SideBar() {
-  const sideBarContext = useSideBarContext()
+  const { totalNoteData, saveCurrentNotebook } = useSideBarContext()
   return (
     <div className='full overflow-y-auto'>
       <ul className=''>
         <h3 className='text-sm font-semibold'>All Notes +</h3>
         <h3 className='text-sm font-semibold'>Notebooks +</h3>
-        {sideBarContext?.notebooks.map((notebook, i) => (
+        {totalNoteData.map(({ notebook }, i) => (
           <li key={i} className='cursor-pointer'>
-            <Link href={`/${titleToSlug(notebook)}`}>
-              <a
-                className='text-sm font-light'
-                onClick={() => sideBarContext?.saveCurrentNoteBook(notebook)}
-              >
-                {notebook}
-              </a>
-            </Link>
+            <a
+              className='text-sm font-light'
+              onClick={() => saveCurrentNotebook(notebook)}
+            >
+              {notebook.title}
+            </a>
           </li>
         ))}
       </ul>
