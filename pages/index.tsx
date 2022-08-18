@@ -1,14 +1,14 @@
-import type { GetStaticPaths, GetStaticProps } from 'next'
+import type { GetStaticProps } from 'next'
 import { useEffect } from 'react'
-import getAllNotebooks from '../lib/getAllNotebooks'
 import getNotes from '../lib/getNotes'
 import { useSideBarContext } from '../context/SideBarContext'
 import { INoteData } from '../types/types'
+import getTotalNotebooks from '../lib/getTotalNotebooks'
 interface Homeprops {
   totalNoteData: INoteData[]
 }
 export const getStaticProps: GetStaticProps = () => {
-  const allNotebooks = getAllNotebooks()
+  const allNotebooks = getTotalNotebooks()
   const totalNoteData = allNotebooks.map((notebook) => ({
     notebook,
     notes: getNotes(notebook.slug),

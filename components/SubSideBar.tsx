@@ -19,7 +19,11 @@ export default function SubSideBar() {
       <ul className='full'>
         {notes.map((note, i) => (
           <li key={i} className='cursor-pointer'>
-            <Link href={`/notes/${note.slug}`}>
+            <Link
+              href={`/notes/${currentNotebook?.title.replace(' ', '-')}/${
+                note.slug
+              }`}
+            >
               <a className='text-xs font-thin'>{note.title}</a>
             </Link>
           </li>

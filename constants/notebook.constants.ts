@@ -1,1 +1,1 @@
-export const NOTEBOOKS_DIR = '/data/notebooks'
+export const NOTES_DIR = 'data/notes'
