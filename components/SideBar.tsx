@@ -1,20 +1,19 @@
-import { useSideBarContext } from '../context/SideBarContext'
+import { useNoteContext } from '../context/NoteContext'
 
 export default function SideBar() {
-  const { totalNoteData, saveCurrentNotebook } = useSideBarContext()
+  const { totalData, saveCurrentNotebook } = useNoteContext()
   return (
     <div className='full overflow-y-auto'>
       <ul className=''>
         <h3 className='text-sm font-semibold'>All Notes +</h3>
         <h3 className='text-sm font-semibold'>Notebooks +</h3>
-        {totalNoteData.map(({ notebook }, i) => (
-          <li key={i} className='cursor-pointer'>
-            <a
-              className='text-sm font-light'
-              onClick={() => saveCurrentNotebook(notebook)}
-            >
-              {notebook.title}
-            </a>
+        {totalData.map(({ notebook }, i) => (
+          <li
+            key={i}
+            className='cursor-pointer'
+            onClick={() => saveCurrentNotebook(notebook)}
+          >
+            <span className='text-sm font-light'>{notebook.title}</span>
           </li>
         ))}
       </ul>

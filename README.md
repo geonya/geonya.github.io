@@ -12,7 +12,10 @@
 - [x] StaticSiteGeneratation Setup
 - [x] SideBar (Notebooks -> Notes)
 - [x] GetNotebooks / GetNotes Class
-- [ ]
-- [ ] .mdx builder setup
+- [x] .mdx builder setup
+- [x] ContextAPI Refactoring
+- [ ] All Notes
+- [ ] Tag Setup
+- [ ] Search
 - [ ] Theme/Font(INTEL) Setup
 - [ ] Deploy in Github Page 🚀

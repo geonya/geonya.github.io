@@ -1,9 +1,9 @@
 import Link from 'next/link'
-import { useSideBarContext } from '../context/SideBarContext'
+import { useNoteContext } from '../context/NoteContext'
 import useGetNotes from '../hooks/useGetNotes'
 
 export default function SubSideBar() {
-  const { currentNotebook, saveCurrentNotebook } = useSideBarContext()
+  const { currentNotebook, saveCurrentNotebook } = useNoteContext()
   const notes = useGetNotes(currentNotebook)
   return (
     <>
@@ -18,15 +18,16 @@ export default function SubSideBar() {
       </div>
       <ul className='full'>
         {notes.map((note, i) => (
-          <li key={i} className='cursor-pointer'>
-            <Link
-              href={`/notes/${currentNotebook?.title.replace(' ', '-')}/${
-                note.slug
-              }`}
-            >
+          <Link
+            key={i}
+            href={`/notes/${currentNotebook?.title.replace(' ', '-')}/${
+              note.slug
+            }`}
+          >
+            <li className='cursor-pointer'>
               <a className='text-xs font-thin'>{note.title}</a>
-            </Link>
-          </li>
+            </li>
+          </Link>
         ))}
       </ul>
     </>
