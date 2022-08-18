@@ -51,7 +51,7 @@ interface NoteProps {
 const Note = ({ totalNotes, source, metaData }: NoteProps) => {
   useSaveTotalData(totalNotes)
   return (
-    <div>
+    <div className='full'>
       <MDXRemote {...source} />
     </div>
   )

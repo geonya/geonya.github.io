@@ -3,7 +3,7 @@ import type { AppProps } from 'next/app'
 import Layout from '../components/Layout'
 import Head from 'next/head'
 import NoteContextProvider from '../context/NoteContext'
-import SidebarContextProiver from '../context/SideBarContext'
+import SidebarContextProiver from '../context/SidebarContext'
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (

@@ -7,13 +7,22 @@ import { slugToTitle } from './changeTitle'
 
 export default function getTotalNotes(): INote[] {
   const noteSlugs = fs.readdirSync(path.join(process.cwd(), `${NOTES_DIR}`))
-  return noteSlugs.map((file) => {
+  const notes = noteSlugs.map((file) => {
     const markdown = fs.readFileSync(
       path.join(process.cwd(), NOTES_DIR, file),
       'utf-8',
     )
     const { data: metaData } = matter(markdown)
     const slug = file.replace('.mdx', '')
-    return { title: slugToTitle(slug), slug, notebook: metaData.notebook }
+
+    return {
+      title: slugToTitle(slug),
+      slug,
+      notebook: metaData.notebook,
+      createdAt: new Date(metaData.createAt),
+    }
   })
+  return notes
+    .sort((a, b) => (a.createdAt < b.createdAt ? -1 : 1))
+    .map((note) => ({ ...note, createdAt: note.createdAt.toString() }))
 }

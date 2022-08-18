@@ -1,7 +1,9 @@
+import moment from 'moment'
 import { NextPage } from 'next'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { useNoteContext } from '../context/NoteContext'
-import { useSidebarContext } from '../context/SideBarContext'
+import { useSidebarContext } from '../context/SidebarContext'
 import metaData from '../data/metaData'
 import SideBar from './SideBar'
 import SubSideBar from './SubSideBar'
@@ -13,10 +15,18 @@ interface LayoutProps {
 const Layout: NextPage<LayoutProps> = ({ children }) => {
   const { toggleSideBar, sideBarShowing } = useSidebarContext()
   const { currentNotebook } = useNoteContext()
+  const [time, setTime] = useState('')
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      const time = moment().format('ddd MMM D hh:mm:ss')
+      setTime(time)
+    }, 1000)
+    return () => clearInterval(timeInterval)
+  }, [])
   return (
-    <div className='h-screen bg-cover bg-center bg-no-repeat bg-base_bg flex items-center'>
-      <div className='full max-h-[800px] mx-auto sm:max-w-screen-sm md:max-screen-md lg:max-w-screen-md xl:max-w-screen-xl grid grid-rows-[50px_1fr_25px] shadow-2xl dark:bg-gray-700/[0.9] backdrop-blur-md dark:text-white font-thin rounded-lg border dark:border-gray-800'>
-        <header className='full grid grid-cols-[50px_1fr_1fr] sm:grid-cols-[50px_1fr_1fr_1fr] px-1 border-gray-800 border-b'>
+    <div className='h-screen bg-cover bg-center bg-no-repeat bg-base_bg flex items-center overflow-hidden'>
+      <div className='full overflow-hidden min-w-[380px] max-h-[800px] mx-auto sm:max-w-screen-sm md:max-screen-md lg:max-w-screen-md xl:max-w-screen-xl grid grid-rows-[50px_1fr_25px] shadow-2xl dark:bg-gray-700/[0.9] backdrop-blur-md dark:text-white font-thin rounded-lg border dark:border-gray-800'>
+        <header className='full grid grid-cols-[50px_1fr_1.2fr] sm:grid-cols-[50px_1fr_1fr_1fr] px-1 border-gray-800 border-b'>
           <div className='grid place-content-center'>
             <span
               onClick={toggleSideBar}
@@ -25,15 +35,15 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
               ㅁ
             </span>
           </div>
-          <div className='full grid place-content-center'>
+          <div className='grid place-content-center bg-red-400'>
             <Link href='/'>
               <h1 className='font-extralight cursor-pointer'>
                 {metaData.title}
               </h1>
             </Link>
           </div>
-          <div className='full flex items-center justify-center'>
-            <form className='w-[90%] max-w-[300px'>
+          <div className='flex items-center justify-center bg-blue-400'>
+            <form className='w-full'>
               <label className='relative'>
                 <span className='absolute top-0 bottom-0 my-auto left-2'>
                   🔎
@@ -52,26 +62,26 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
               <span>🕐</span>
               <span>☕️</span>
             </div>
-            <h4>08:48</h4>
+            <h4 className='text-sm'>{time}</h4>
           </div>
         </header>
-        <main className='full flex relative'>
+        <main className='full flex relative min-w-[380px] overflow-hidden'>
           {/* Side Bar */}
           {sideBarShowing && (
-            <div className='flex h-full absolute sm:static sm:top-0 sm:left-0 bg-gray-800 backdrop-blur-md'>
-              <div className='w-24 sm:w-52 border-r border-gray-900'>
+            <div className='flex bg-gray-800/[0.9] backdrop-blur-md'>
+              <div className='w-24 sm:w-32 md:52 border-r border-gray-900 bg-red-400'>
                 <SideBar />
               </div>
               {currentNotebook && (
-                <div className='w-32 sm:w-52 border-r border-gray-900'>
+                <div className='w-32 sm:w-32 md:52 border-r border-gray-900 bg-blue-400'>
                   <SubSideBar />
                 </div>
               )}
             </div>
           )}
-          <div className='w-full'>{children}</div>
+          <div className='full overflow-scroll'>{children}</div>
         </main>
-        <footer className='full grid place-content-center border-gray-800 border-t'>
+        <footer className='full grid place-content-center border-gray-800 border-t bg-green-400'>
           <span className='text-sm'>this is status bar.</span>
         </footer>
       </div>
