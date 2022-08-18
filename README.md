@@ -10,6 +10,7 @@
 - [x] DOM Setup
 - [x] Responsive Design (mobile first)
 - [x] StaticSiteGeneratation Setup
+- [ ] SideBar (Notebooks -> Notes)
 - [ ] .mdx builder setup
 - [ ] Theme/Font(INTEL) Setup
 - [ ] Deploy in Github Page 🚀

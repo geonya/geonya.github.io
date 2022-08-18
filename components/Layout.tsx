@@ -1,4 +1,5 @@
 import { NextPage } from 'next'
+import Link from 'next/link'
 import metaData from '../data/metaData'
 import { useSideBarContext } from '../lib/SideBarContext'
 import SideBar from './SideBar'
@@ -23,7 +24,11 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
 						</span>
 					</div>
 					<div className="full grid place-content-center">
-						<h1 className="font-extralight">{metaData.title}</h1>
+						<Link href="/">
+							<h1 className="font-extralight cursor-pointer">
+								{metaData.title}
+							</h1>
+						</Link>
 					</div>
 					<div className="full flex items-center justify-center">
 						<form className="w-[90%] max-w-[300px">
@@ -52,12 +57,14 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
 					{/* Side Bar */}
 					{sideBarContext?.sideBarShowing && (
 						<div className="flex h-full absolute sm:static sm:top-0 sm:left-0 bg-gray-800 backdrop-blur-md">
-							<div className="w-24 sm:w-52 border-r border-gray-800">
+							<div className="w-24 sm:w-52 border-r border-gray-900">
 								<SideBar />
 							</div>
-							<div className="w-32 sm:w-52 border-r border-gray-800">
-								<SubSideBar />
-							</div>
+							{sideBarContext.currentNotebook && (
+								<div className="w-32 sm:w-52 border-r border-gray-900">
+									<SubSideBar />
+								</div>
+							)}
 						</div>
 					)}
 					<div className="w-full">{children}</div>
