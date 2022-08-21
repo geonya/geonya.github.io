@@ -8,5 +8,6 @@ export interface INote {
   slug: string
   notebook: string
   tags: ITag[] = []
+  content: string
   createdAt: string
 }

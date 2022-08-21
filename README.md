@@ -19,8 +19,9 @@
 - [x] To implant a watch in the top tab
 - [x] Sort all notes by date
 - [x] Interval Timer Redering Bug Fix
-- [ ] Tag Setup
-  - [ ] Data
+- [x] Tag Setup
+  - [x] Sorting notes with tag
+- [x] Latest note on index page
 - [ ] Search
 - [ ] Theme/Font(INTEL) Setup
 - [ ] Deploy in Github Page 🚀

@@ -12,7 +12,7 @@ export default function getTotalNotes(): INote[] {
       path.join(process.cwd(), NOTES_DIR, file),
       'utf-8',
     )
-    const { data: frontData } = matter(markdown)
+    const { data: frontData, content } = matter(markdown)
     const slug = file.replace('.mdx', '')
     let tags: ITag[] = []
     if (frontData.tags && frontData.tags.length > 0) {
@@ -25,6 +25,7 @@ export default function getTotalNotes(): INote[] {
       title: slugToTitle(slug),
       slug,
       tags,
+      content,
       notebook: frontData.notebook,
       createdAt: new Date(frontData.createAt),
     }
