@@ -1,5 +1,5 @@
 export interface ITag {
-  tag: string
+  name: string
   slug: string
 }
 
@@ -7,6 +7,6 @@ export interface INote {
   title: string
   slug: string
   notebook: string
-  tag?: ITag[]
+  tags: ITag[] = []
   createdAt: string
 }

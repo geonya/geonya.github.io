@@ -1,18 +1,16 @@
 import Link from 'next/link'
-import { useNoteContext } from '../context/NoteContext'
+import { useSidebarContext } from '../context/SidebarContext'
 import useGetNotes from '../hooks/useGetNotes'
 
 export default function SubSideBar() {
-  const { currentNotebook, saveCurrentNotebook } = useNoteContext()
-  const notes = useGetNotes(currentNotebook)
+  const { subSideBarLabel, saveSubSideBarLabel } = useSidebarContext()
+  const notes = useGetNotes(subSideBarLabel)
+  const onDismiss = () => saveSubSideBarLabel(null)
   return (
     <>
       <div className='flex justify-between'>
-        <h1>{currentNotebook}</h1>
-        <div
-          onClick={() => saveCurrentNotebook(null)}
-          className='p-1 cursor-pointer'
-        >
+        <h1>{subSideBarLabel?.title}</h1>
+        <div onClick={() => onDismiss()} className='p-1 cursor-pointer'>
           <span>X</span>
         </div>
       </div>

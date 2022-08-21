@@ -2,6 +2,8 @@
 
 ### Next.js + TailwindCSS Static Stie
 
+#### TODO
+
 - [x] TailwindCSS Setup
 - [x] Figma Layout Design
 - [x] HTML Main Layout
@@ -16,7 +18,9 @@
 - [x] ContextAPI Refactoring
 - [x] To implant a watch in the top tab
 - [x] Sort all notes by date
+- [x] Interval Timer Redering Bug Fix
 - [ ] Tag Setup
+  - [ ] Data
 - [ ] Search
 - [ ] Theme/Font(INTEL) Setup
 - [ ] Deploy in Github Page 🚀

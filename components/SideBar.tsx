@@ -1,17 +1,23 @@
 import { ALL_NOTES } from '../constants/notebook.constants'
 import { useNoteContext } from '../context/NoteContext'
+import { useSidebarContext } from '../context/SidebarContext'
+import extractTags from '../lib/extractTags'
 
 export default function SideBar() {
-  const { totalNotes, currentNotebook, saveCurrentNotebook } = useNoteContext()
+  const { totalNotes } = useNoteContext()
+  const { saveSubSideBarLabel, subSideBarLabel } = useSidebarContext()
+
+  const tags = extractTags(totalNotes)
   return (
     <div className='full overflow-y-auto'>
       <ul className=''>
         <h3
           className='text-sm font-semibold cursor-pointer'
           onClick={() =>
-            saveCurrentNotebook(
-              currentNotebook !== ALL_NOTES ? ALL_NOTES : null,
-            )
+            saveSubSideBarLabel({
+              type: 'note',
+              title: ALL_NOTES,
+            })
           }
         >
           All Notes +
@@ -22,9 +28,10 @@ export default function SideBar() {
             key={i}
             className='cursor-pointer'
             onClick={() =>
-              saveCurrentNotebook(
-                notebook !== currentNotebook ? notebook : null,
-              )
+              saveSubSideBarLabel({
+                type: 'note',
+                title: notebook,
+              })
             }
           >
             <span className='text-sm font-light'>{notebook}</span>
@@ -33,17 +40,15 @@ export default function SideBar() {
       </ul>
       <ul className='mt-24'>
         <h3 className='text-sm font-semibold'>Tags +</h3>
-        {totalNotes.map(({ notebook }, i) => (
+        {tags.map((tag, i) => (
           <li
             key={i}
             className='cursor-pointer'
             onClick={() =>
-              saveCurrentNotebook(
-                notebook !== currentNotebook ? notebook : null,
-              )
+              saveSubSideBarLabel({ type: 'tag', title: tag.name })
             }
           >
-            <span className='text-sm font-light'>{notebook}</span>
+            <span className='text-sm font-light'>{tag.name}</span>
           </li>
         ))}
       </ul>

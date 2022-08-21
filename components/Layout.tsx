@@ -12,8 +12,8 @@ interface LayoutProps {
 }
 
 const Layout: NextPage<LayoutProps> = ({ children }) => {
-  const { toggleSideBar, sideBarShowing } = useSidebarContext()
-  const { currentNotebook } = useNoteContext()
+  const { toggleSideBar, sideBarShowing, subSideBarLabel } = useSidebarContext()
+
   console.log('rendering')
   return (
     <div className='h-screen bg-cover bg-center bg-no-repeat bg-base_bg flex items-center overflow-hidden'>
@@ -64,7 +64,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
               <div className='w-24 sm:w-32 md:52 border-r border-gray-900 bg-red-400'>
                 <SideBar />
               </div>
-              {currentNotebook && (
+              {subSideBarLabel && (
                 <div className='w-32 sm:w-32 md:52 border-r border-gray-900 bg-blue-400'>
                   <SubSideBar />
                 </div>
