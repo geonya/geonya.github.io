@@ -16,12 +16,13 @@
 - [x] GetNotebooks / GetNotes Class
 - [x] .mdx builder setup
 - [x] ContextAPI Refactoring
-- [x] To implant a watch in the top tab
+- [x] To implant a Clock in the top tab
+  - [ ] AM/PM
 - [x] Sort all notes by date
 - [x] Interval Timer Redering Bug Fix
 - [x] Tag Setup
   - [x] Sorting notes with tag
 - [x] Latest note on index page
-- [ ] Search
+- [x] Search
 - [ ] Theme/Font(INTEL) Setup
 - [ ] Deploy in Github Page 🚀
