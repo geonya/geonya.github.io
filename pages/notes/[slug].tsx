@@ -9,6 +9,7 @@ import { GetStaticPaths } from 'next'
 import useSaveTotalData from '../../hooks/useSaveTotalNotes'
 import { INote } from '../../types/types'
 import getTotalNotes from '../../lib/getTotalNotes'
+import MDX from '../../components/MDX'
 
 interface NoteProps {
   totalNotes: INote[]
@@ -50,11 +51,7 @@ interface NoteProps {
 }
 const Note = ({ totalNotes, source, metaData }: NoteProps) => {
   useSaveTotalData(totalNotes)
-  return (
-    <div className='full'>
-      <MDXRemote {...source} />
-    </div>
-  )
+  return <MDX source={source} />
 }
 
 export default Note

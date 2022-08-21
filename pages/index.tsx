@@ -8,6 +8,7 @@ import path from 'path'
 import { NOTES_DIR } from '../constants/notebook.constants'
 import matter from 'gray-matter'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
+import MDX from '../components/MDX'
 interface HomeProps {
   totalNotes: INote[]
   metaData: { [key: string]: string }
@@ -31,11 +32,7 @@ export const getStaticProps: GetStaticProps = async () => {
 }
 const Home = ({ totalNotes, source, metaData }: HomeProps) => {
   useSaveTotalNotes(totalNotes)
-  return (
-    <div className='full'>
-      <MDXRemote {...source} />
-    </div>
-  )
+  return <MDX source={source} />
 }
 
 export default Home

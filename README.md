@@ -24,5 +24,8 @@
   - [x] Sorting notes with tag
 - [x] Latest note on index page
 - [x] Search
-- [ ] Theme/Font(INTEL) Setup
+- [x] Font(INTEL) Setup
+- [ ] DaisyUI setup
+- [ ] Tailwind-Typography setup
+  - [ ] code block prose class bug
 - [ ] Deploy in Github Page 🚀
