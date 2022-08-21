@@ -14,7 +14,8 @@
 - [x] GetNotebooks / GetNotes Class
 - [x] .mdx builder setup
 - [x] ContextAPI Refactoring
-- [ ] All Notes
+- [x] To implant a watch in the top tab
+- [x] Sort all notes by date
 - [ ] Tag Setup
 - [ ] Search
 - [ ] Theme/Font(INTEL) Setup

@@ -33,6 +33,19 @@ export default function SideBar() {
       </ul>
       <ul className='mt-24'>
         <h3 className='text-sm font-semibold'>Tags +</h3>
+        {totalNotes.map(({ notebook }, i) => (
+          <li
+            key={i}
+            className='cursor-pointer'
+            onClick={() =>
+              saveCurrentNotebook(
+                notebook !== currentNotebook ? notebook : null,
+              )
+            }
+          >
+            <span className='text-sm font-light'>{notebook}</span>
+          </li>
+        ))}
       </ul>
     </div>
   )

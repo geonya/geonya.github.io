@@ -1,10 +1,9 @@
-import moment from 'moment'
 import { NextPage } from 'next'
 import Link from 'next/link'
-import { useEffect, useState } from 'react'
 import { useNoteContext } from '../context/NoteContext'
 import { useSidebarContext } from '../context/SidebarContext'
 import metaData from '../data/metaData'
+import Clock from './Clock'
 import SideBar from './SideBar'
 import SubSideBar from './SubSideBar'
 
@@ -15,14 +14,7 @@ interface LayoutProps {
 const Layout: NextPage<LayoutProps> = ({ children }) => {
   const { toggleSideBar, sideBarShowing } = useSidebarContext()
   const { currentNotebook } = useNoteContext()
-  const [time, setTime] = useState('')
-  useEffect(() => {
-    const timeInterval = setInterval(() => {
-      const time = moment().format('ddd MMM D hh:mm:ss')
-      setTime(time)
-    }, 1000)
-    return () => clearInterval(timeInterval)
-  }, [])
+  console.log('rendering')
   return (
     <div className='h-screen bg-cover bg-center bg-no-repeat bg-base_bg flex items-center overflow-hidden'>
       <div className='full overflow-hidden min-w-[380px] max-h-[800px] mx-auto sm:max-w-screen-sm md:max-screen-md lg:max-w-screen-md xl:max-w-screen-xl grid grid-rows-[50px_1fr_25px] shadow-2xl dark:bg-gray-700/[0.9] backdrop-blur-md dark:text-white font-thin rounded-lg border dark:border-gray-800'>
@@ -57,12 +49,12 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
             </form>
           </div>
           <div className='full hidden sm:flex items-center justify-around'>
-            <div className='space-x-2'>
+            <div className='space-x-2 hidden lg:flex'>
               <span>🗓/</span>
               <span>🕐</span>
               <span>☕️</span>
             </div>
-            <h4 className='text-sm'>{time}</h4>
+            <Clock />
           </div>
         </header>
         <main className='full flex relative min-w-[380px] overflow-hidden'>

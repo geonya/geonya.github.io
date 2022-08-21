@@ -2,8 +2,8 @@ import fs from 'fs'
 import matter from 'gray-matter'
 import path from 'path'
 import { NOTES_DIR } from '../constants/notebook.constants'
-import { INote } from '../types/types'
-import { slugToTitle } from './changeTitle'
+import { INote, ITag } from '../types/types'
+import { slugToTitle, titleToSlug } from './changeTitle'
 
 export default function getTotalNotes(): INote[] {
   const noteSlugs = fs.readdirSync(path.join(process.cwd(), `${NOTES_DIR}`))
@@ -12,14 +12,21 @@ export default function getTotalNotes(): INote[] {
       path.join(process.cwd(), NOTES_DIR, file),
       'utf-8',
     )
-    const { data: metaData } = matter(markdown)
+    const { data: frontData } = matter(markdown)
     const slug = file.replace('.mdx', '')
-
+    let tags: ITag[] = []
+    if (frontData.tags && frontData.tags.length > 0) {
+      tags = frontData.tags.map((tag: string) => ({
+        name: tag,
+        slug: titleToSlug(tag),
+      }))
+    }
     return {
       title: slugToTitle(slug),
       slug,
-      notebook: metaData.notebook,
-      createdAt: new Date(metaData.createAt),
+      tags,
+      notebook: frontData.notebook,
+      createdAt: new Date(frontData.createAt),
     }
   })
   return notes

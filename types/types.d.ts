@@ -1,4 +1,4 @@
-export interface Tag {
+export interface ITag {
   tag: string
   slug: string
 }
@@ -7,6 +7,6 @@ export interface INote {
   title: string
   slug: string
   notebook: string
-  tag?: Tag[]
+  tag?: ITag[]
   createdAt: string
 }
