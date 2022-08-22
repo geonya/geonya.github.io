@@ -5,7 +5,7 @@ import extractTags from '../lib/extractTags'
 
 export default function SideBar() {
   const { totalNotes } = useNoteContext()
-  const { saveSubSideBarLabel, subSideBarLabel } = useSidebarContext()
+  const { saveSubSideBarLabel } = useSidebarContext()
 
   const tags = extractTags(totalNotes)
   return (

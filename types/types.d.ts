@@ -11,3 +11,10 @@ export interface INote {
   content: string
   createdAt: string
 }
+
+export interface IMetaData {
+  title: string
+  tags: string[]
+  notebook: string
+  createdAt: string
+}

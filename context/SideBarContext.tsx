@@ -9,7 +9,7 @@ export interface ISubSideBarLabel {
 
 interface ISidebarContext {
   sideBarShowing: boolean
-  toggleSideBar: () => void
+  toggleSideBar: (set?: boolean) => void
 
   subSideBarLabel: ISubSideBarLabel | null
   saveSubSideBarLabel: (label: ISubSideBarLabel | null) => void
@@ -26,7 +26,8 @@ export default function SidebarContextProiver({
   children,
 }: SidebarContextProviderProps) {
   const [sideBarShowing, setSideBarShowing] = useState(false)
-  const toggleSideBar = () => setSideBarShowing((prev) => !prev)
+  const toggleSideBar = (set?: boolean) =>
+    setSideBarShowing(set ? set : (prev) => !prev)
 
   const [subSideBarLabel, setSubSideBarLabel] =
     useState<ISubSideBarLabel | null>(null)

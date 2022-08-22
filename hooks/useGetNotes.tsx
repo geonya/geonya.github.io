@@ -12,8 +12,9 @@ export default function useGetNotes(label: ISubSideBarLabel | null): INote[] {
     if (label.type === 'note') {
       if (label.title === ALL_NOTES) {
         setNotes(totalNotes)
+      } else {
+        setNotes(totalNotes.filter((note) => note.notebook === label.title))
       }
-      setNotes(totalNotes.filter((note) => note.notebook === label.title))
     }
     if (label.type === 'tag') {
       setNotes(

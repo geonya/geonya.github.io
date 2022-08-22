@@ -5,6 +5,7 @@ import useGetNotes from '../hooks/useGetNotes'
 export default function SubSideBar() {
   const { subSideBarLabel, saveSubSideBarLabel } = useSidebarContext()
   const notes = useGetNotes(subSideBarLabel)
+  console.log(notes)
   const onDismiss = () => saveSubSideBarLabel(null)
   return (
     <>

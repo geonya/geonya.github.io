@@ -25,7 +25,10 @@
 - [x] Latest note on index page
 - [x] Search
 - [x] Font(INTEL) Setup
-- [ ] DaisyUI setup
-- [ ] Tailwind-Typography setup
+- [x] All Notes Bug Fix (issue : if else)
+- [x] DaisyUI setup
+- [x] Tailwind-Typography setup
   - [ ] code block prose class bug
+- [x] Showing mdx Metadata
+- [ ] layout detail design
 - [ ] Deploy in Github Page 🚀
