@@ -17,7 +17,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
   const { toggleSideBar, sideBarShowing, subSideBarLabel } = useSidebarContext()
   return (
     <div className='h-screen bg-cover bg-center bg-no-repeat bg-base_bg flex items-center overflow-hidden'>
-      <div className='full overflow-hidden min-w-[380px] max-h-[800px] mx-auto sm:max-w-screen-sm md:max-screen-md lg:max-w-screen-md xl:max-w-screen-xl grid grid-rows-[50px_1fr_25px] shadow-2xl dark:bg-gray-700/[0.9] backdrop-blur-md dark:text-white font-thin rounded-lg border dark:border-gray-800'>
+      <div className='full overflow-hidden min-w-[380px] max-h-[800px] mx-auto sm:max-w-screen-sm md:max-screen-md lg:max-w-screen-md xl:max-w-screen-xl grid grid-rows-[50px_1fr_25px] shadow-2xl dark:bg-gray-700/[0.9] backdrop-blur-md dark:text-gray-300 font-thin rounded-lg border dark:border-gray-800'>
         <header className='full grid grid-cols-[50px_1fr_1.2fr] sm:grid-cols-[50px_1fr_1fr_1fr] px-1 border-gray-800 border-b'>
           <button
             className='btn btn-square btn-ghost p-1'
@@ -39,7 +39,10 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
           </button>
           <div className='grid place-content-center'>
             <Link href='/'>
-              <h1 className='font-extralight cursor-pointer'>
+              <h1
+                className='font-extralight cursor-pointer'
+                onClick={() => toggleSideBar(false)}
+              >
                 {metaData.title}
               </h1>
             </Link>
@@ -56,11 +59,11 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
           {/* Side Bar */}
           {sideBarShowing && (
             <div className='flex bg-gray-800/[0.9] backdrop-blur-md'>
-              <div className='w-24 sm:w-32 md:52 border-r border-gray-900'>
+              <div className='w-24 sm:w-32 md:52 border-r border-gray-900 sub-padding'>
                 <SideBar />
               </div>
               {subSideBarLabel && (
-                <div className='w-32 sm:w-32 md:52 border-r border-gray-900'>
+                <div className='w-32 sm:w-32 md:52 border-r border-gray-900 sub-padding'>
                   <SubSideBar />
                 </div>
               )}

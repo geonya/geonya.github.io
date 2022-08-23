@@ -14,10 +14,10 @@ export default function MDX({ source, metaData }: MDXProps) {
     saveSubSideBarLabel({ type: 'tag', title: tagName })
   }
   return (
-    <article className='full prose'>
+    <article className='full prose main-padding'>
       <section className='w-full'>
-        <h1>{metaData?.title}</h1>
-        <h2>CreatedAt : {metaData?.createdAt}</h2>
+        <h2>{metaData?.title}</h2>
+        <h4>{metaData?.createdAt}</h4>
         <div className='space-x-2'>
           {metaData?.tags?.map((tagName, i) => (
             <span

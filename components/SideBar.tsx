@@ -6,13 +6,12 @@ import extractTags from '../lib/extractTags'
 export default function SideBar() {
   const { totalNotes } = useNoteContext()
   const { saveSubSideBarLabel } = useSidebarContext()
-
   const tags = extractTags(totalNotes)
   return (
     <div className='full overflow-y-auto'>
-      <ul className=''>
+      <div className=''>
         <h3
-          className='text-sm font-semibold cursor-pointer'
+          className='sidebar-title mb-2'
           onClick={() =>
             saveSubSideBarLabel({
               type: 'note',
@@ -22,36 +21,39 @@ export default function SideBar() {
         >
           All Notes +
         </h3>
-
-        {totalNotes.map(({ notebook }, i) => (
-          <li
-            key={i}
-            className='cursor-pointer'
-            onClick={() =>
-              saveSubSideBarLabel({
-                type: 'note',
-                title: notebook,
-              })
-            }
-          >
-            <span className='text-sm font-light'>{notebook}</span>
-          </li>
-        ))}
-      </ul>
-      <ul className='mt-24'>
-        <h3 className='text-sm font-semibold'>Tags +</h3>
-        {tags.map((tag, i) => (
-          <li
-            key={i}
-            className='cursor-pointer'
-            onClick={() =>
-              saveSubSideBarLabel({ type: 'tag', title: tag.name })
-            }
-          >
-            <span className='text-sm font-light'>{tag.name}</span>
-          </li>
-        ))}
-      </ul>
+        <ul className='sidebar-ul'>
+          {totalNotes.map(({ notebook }, i) => (
+            <li
+              key={i}
+              className='cursor-pointer'
+              onClick={() =>
+                saveSubSideBarLabel({
+                  type: 'note',
+                  title: notebook,
+                })
+              }
+            >
+              <a className='text-sm font-light'>{notebook}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div className='mt-10'>
+        <h3 className='sidebar-title mb-2'>Tags +</h3>
+        <ul className='sidebar-ul'>
+          {tags.map((tag, i) => (
+            <li
+              key={i}
+              className='cursor-pointer'
+              onClick={() =>
+                saveSubSideBarLabel({ type: 'tag', title: tag.name })
+              }
+            >
+              <a className='text-sm font-light'>{tag.name}</a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   )
 }

@@ -15,7 +15,11 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography'), require('daisyui')],
+  plugins: [
+    require('@tailwindcss/typography'),
+    require('daisyui'),
+    require('tailwind-scrollbar-hide'),
+  ],
   // daisyUI config (optional)
   daisyui: {
     styled: true,

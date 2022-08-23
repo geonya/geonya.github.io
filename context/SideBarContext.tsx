@@ -27,7 +27,7 @@ export default function SidebarContextProiver({
 }: SidebarContextProviderProps) {
   const [sideBarShowing, setSideBarShowing] = useState(false)
   const toggleSideBar = (set?: boolean) =>
-    setSideBarShowing(set ? set : (prev) => !prev)
+    setSideBarShowing(typeof set !== 'undefined' ? set : (prev) => !prev)
 
   const [subSideBarLabel, setSubSideBarLabel] =
     useState<ISubSideBarLabel | null>(null)

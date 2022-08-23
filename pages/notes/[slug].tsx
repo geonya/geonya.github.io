@@ -7,13 +7,13 @@ import { MDXRemote, type MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { NOTES_DIR } from '../../constants/notebook.constants'
 import { GetStaticPaths } from 'next'
 import useSaveTotalData from '../../hooks/useSaveTotalNotes'
-import { INote } from '../../types/types'
+import { IMetaData, INote } from '../../types/types'
 import getTotalNotes from '../../lib/getTotalNotes'
 import MDX from '../../components/MDX'
 
 interface NoteProps {
   totalNotes: INote[]
-  metaData: { [key: string]: string }
+  metaData: IMetaData
   source: MDXRemoteSerializeResult<Record<string, unknown>>
 }
 
@@ -51,7 +51,7 @@ interface NoteProps {
 }
 const Note = ({ totalNotes, source, metaData }: NoteProps) => {
   useSaveTotalData(totalNotes)
-  return <MDX source={source} />
+  return <MDX source={source} metaData={metaData} />
 }
 
 export default Note
