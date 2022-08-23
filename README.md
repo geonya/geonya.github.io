@@ -30,5 +30,6 @@
 - [x] Tailwind-Typography setup
   - [ ] code block prose class bug
 - [x] Showing mdx Metadata
+- [ ] Test Deploy in vercel
 - [ ] layout detail design
 - [ ] Deploy in Github Page 🚀
