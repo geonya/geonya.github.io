@@ -14,15 +14,20 @@ export default function MDX({ source, metaData }: MDXProps) {
     saveSubSideBarLabel({ type: 'tag', title: tagName })
   }
   return (
-    <article className='full prose main-padding'>
-      <section className='w-full'>
-        <h2>{metaData?.title}</h2>
-        <h4>{metaData?.createdAt}</h4>
+    <article className='full main-padding'>
+      <section className='w-full mb-5 space-y-3'>
+        <h2 className='text-gray-300 text-3xl font-medium'>
+          {metaData?.title}
+        </h2>
+        <div className='flex space-x-3'>
+          <h4 className='text-gray-400'>Geony</h4>
+          <h4 className='text-gray-400'>{metaData?.createdAt}</h4>
+        </div>
         <div className='space-x-2'>
           {metaData?.tags?.map((tagName, i) => (
             <span
               key={i}
-              className='cursor-pointer'
+              className='cursor-pointer px-2 py-1 bg-gray-500 text-gray-200 rounded-full'
               onClick={() => onTagClick(tagName)}
             >
               {tagName}
@@ -30,7 +35,7 @@ export default function MDX({ source, metaData }: MDXProps) {
           ))}
         </div>
       </section>
-      <section className='w-full'>
+      <section className='prose'>
         <MDXRemote {...source} />
       </section>
     </article>

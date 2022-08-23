@@ -17,7 +17,7 @@
 - [x] .mdx builder setup
 - [x] ContextAPI Refactoring
 - [x] To implant a Clock in the top tab
-  - [ ] AM/PM
+  - [x] AM/PM
 - [x] Sort all notes by date
 - [x] Interval Timer Redering Bug Fix
 - [x] Tag Setup
@@ -31,5 +31,8 @@
   - [ ] code block prose color bug
 - [x] Showing mdx Metadata
 - [x] Test Deploy in vercel
+- [ ] 모바일 코드뷰 확대 방지
 - [ ] layout detail design
+- [ ] Dark mode / Light mode
+- [ ] Comment
 - [x] Deploy in Github Page 🚀
