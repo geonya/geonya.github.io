@@ -28,8 +28,8 @@
 - [x] All Notes Bug Fix (issue : if else)
 - [x] DaisyUI setup
 - [x] Tailwind-Typography setup
-  - [ ] code block prose class bug
+  - [ ] code block prose color bug
 - [x] Showing mdx Metadata
-- [ ] Test Deploy in vercel
+- [x] Test Deploy in vercel
 - [ ] layout detail design
-- [ ] Deploy in Github Page 🚀
+- [x] Deploy in Github Page 🚀

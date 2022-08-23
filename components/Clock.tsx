@@ -5,7 +5,7 @@ export default function Clock() {
   const [time, setTime] = useState('')
   useEffect(() => {
     setInterval(() => {
-      let time = moment().format('ddd MMM D hh:mm:ss')
+      let time = moment().format('ddd MMM D HH:mm:ss')
       setTime(time)
     }, 1000)
   }, [])
