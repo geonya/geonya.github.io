@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+.full {
+  @apply w-full h-full;
+}
+.main-padding {
+  @apply p-5;
+}
+.sub-padding {
+  @apply p-2.5;
+}
+.sidebar-title {
+  @apply text-sm font-semibold cursor-pointer;
+}
+.sidebar-ul {
+  @apply w-full overflow-x-scroll scrollbar-hide space-y-1;
+}
+@tailwind utilities;
