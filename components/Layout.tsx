@@ -16,7 +16,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
   const router = useRouter()
   const { toggleSideBar, sideBarShowing, subSideBarLabel } = useSidebarContext()
   return (
-    <div className='h-screen bg-cover bg-center bg-no-repeat bg-base_bg flex items-center overflow-hidden'>
+    <div className='h-screen bg-cover bg-center bg-no-repeat bg-base_bg flex items-center overflow-hidden scrollbar-hide'>
       <div className='full overflow-hidden min-w-[380px] max-h-[800px] mx-auto sm:max-w-screen-sm md:max-screen-md lg:max-w-screen-md xl:max-w-screen-xl grid grid-rows-[50px_1fr_25px] shadow-2xl bg-gray-700/[0.9] backdrop-blur-md text-gray-300 font-thin rounded-lg border border-gray-800'>
         <header className='full grid grid-cols-[50px_1fr_1.2fr] sm:grid-cols-[50px_1fr_1fr_1fr] px-1 border-gray-800 border-b'>
           <button
