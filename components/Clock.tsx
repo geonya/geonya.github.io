@@ -1,3 +1,4 @@
+import { Text } from '@mantine/core'
 import moment from 'moment'
 import { useEffect, useState } from 'react'
 
@@ -9,5 +10,5 @@ export default function Clock() {
       setTime(time)
     }, 1000)
   }, [])
-  return <h4 className='text-sm'>{time}</h4>
+  return <Text>{time}</Text>
 }

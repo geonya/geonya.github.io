@@ -31,8 +31,10 @@
   - [ ] code block prose color bug
 - [x] Showing mdx Metadata
 - [x] Test Deploy in vercel
-- [ ] 모바일 코드뷰 확대 방지
+- [ ] 모바일 코드뷰 확대 방지 ?
+- [ ] Mantine 로 refactoring ?
 - [ ] layout detail design
 - [ ] Dark mode / Light mode
+- [ ] Search
 - [ ] Comment
 - [x] Deploy in Github Page 🚀

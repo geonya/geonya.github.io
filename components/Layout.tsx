@@ -1,10 +1,29 @@
+import {
+  AppShell,
+  Aside,
+  BackgroundImage,
+  Box,
+  Burger,
+  Card,
+  Center,
+  Grid,
+  MediaQuery,
+  ScrollArea,
+  SimpleGrid,
+  Stack,
+  Text,
+  useMantineTheme,
+} from '@mantine/core'
+import { useMediaQuery, useViewportSize } from '@mantine/hooks'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
 import { useSidebarContext } from '../context/SidebarContext'
 import metaData from '../data/metaData'
 import Clock from './Clock'
 import Search from './Search'
+import Section from './Section'
 import SideBar from './SideBar'
 import SubSideBar from './SubSideBar'
 
@@ -15,69 +34,193 @@ interface LayoutProps {
 const Layout: NextPage<LayoutProps> = ({ children }) => {
   const router = useRouter()
   const { toggleSideBar, sideBarShowing, subSideBarLabel } = useSidebarContext()
+  const [opened, setOpened] = useState(false)
+  const theme = useMantineTheme()
+  const borderWidth = '1px'
+  const borderColor =
+    theme.colorScheme === 'dark' ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)'
+  const dark = theme.colorScheme === 'dark'
   return (
-    <div className='h-screen bg-cover bg-center bg-no-repeat bg-base_bg flex items-center overflow-hidden scrollbar-hide'>
-      <div className='full overflow-hidden min-w-[380px] max-h-[800px] mx-auto sm:max-w-screen-sm md:max-screen-md lg:max-w-screen-md xl:max-w-screen-xl grid grid-rows-[50px_1fr_25px] shadow-2xl bg-gray-700/[0.9] backdrop-blur-md text-gray-300 font-thin rounded-lg border border-gray-800 scrollbar-hide'>
-        <header className='full grid grid-cols-[50px_1fr_1.2fr] sm:grid-cols-[50px_1fr_1fr_1fr] px-1 border-gray-800 border-b'>
-          <button
-            className='btn btn-square btn-ghost p-1'
-            onClick={() => toggleSideBar()}
+    <BackgroundImage src={'/images/base-background-img.jpeg'}>
+      <Center sx={{ width: '100vw', height: '100vh' }}>
+        <Section
+          sx={(theme) => ({
+            [`@media (max-width: ${theme.breakpoints.xl}px)`]: {
+              width: theme.breakpoints.lg,
+            },
+            [`@media (min-width: ${theme.breakpoints.xl}px)`]: {
+              width: theme.breakpoints.xl,
+            },
+            height: 800,
+            borderRadius: theme.radius.md,
+            overflow: 'hidden',
+            borderWidth,
+            borderColor,
+          })}
+        >
+          <Section
+            sx={{
+              height: 50,
+              display: 'flex',
+              alignItems: 'center',
+              borderBottomWidth: borderWidth,
+              borderBottomColor: borderColor,
+            }}
           >
-            <svg
-              xmlns='http://www.w3.org/2000/svg'
-              fill='none'
-              viewBox='0 0 24 24'
-              className='inline-block w-5 h-5 stroke-current'
+            <Grid
+              grow
+              sx={{
+                width: '100%',
+                [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+                  fontSize: theme.fontSizes.sm,
+                },
+              }}
+              px={15}
             >
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth='2'
-                d='M4 6h16M4 12h16M4 18h16'
-              ></path>
-            </svg>
-          </button>
-          <div className='grid place-content-center'>
-            <Link href='/'>
-              <h1
-                className='font-extralight cursor-pointer'
-                onClick={() => toggleSideBar(false)}
+              <Grid.Col
+                span={1}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  alignItems: 'center',
+                }}
               >
-                {metaData.title}
-              </h1>
-            </Link>
-          </div>
-          <div className='flex items-center justify-center'>
-            <Search />
-          </div>
-          <div className='full hidden sm:flex items-center justify-around'>
-            <div className='space-x-2 hidden lg:flex'></div>
-            <Clock />
-          </div>
-        </header>
-        <main className='full flex relative min-w-[380px] overflow-hidden scrollbar-hide'>
-          {/* Side Bar */}
-          {sideBarShowing && (
-            <div className='flex bg-gray-800/[0.9] backdrop-blur-md'>
-              <div className='w-24 sm:w-32 md:52 border-r border-gray-900 sub-padding'>
-                <SideBar />
-              </div>
-              {subSideBarLabel && (
-                <div className='w-32 sm:w-32 md:52 border-r border-gray-900 sub-padding'>
-                  <SubSideBar />
-                </div>
-              )}
-            </div>
-          )}
-          <div className='full overflow-scroll'>{children}</div>
-        </main>
-        <footer className='full grid place-content-center border-gray-800 border-t'>
-          <span className='text-sm text-gray-400'>
-            path : {(router.asPath as string) || ''}
-          </span>
-        </footer>
-      </div>
-    </div>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}
+                >
+                  <Burger
+                    opened={sideBarShowing}
+                    onClick={() => toggleSideBar()}
+                    size='sm'
+                    color={theme.colors.gray[6]}
+                  />
+                </Box>
+              </Grid.Col>
+              <Grid.Col
+                span={3}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <Box>
+                  <Text>Geony Devnotes</Text>
+                </Box>
+              </Grid.Col>
+              <Grid.Col
+                span={3}
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                }}
+              >
+                <Box>
+                  <Text>Search</Text>
+                </Box>
+              </Grid.Col>
+              <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
+                <Grid.Col
+                  span={3}
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'flex-end',
+                  }}
+                >
+                  <Box>
+                    <Clock />
+                  </Box>
+                </Grid.Col>
+              </MediaQuery>
+            </Grid>
+          </Section>
+          <ScrollArea
+            scrollbarSize={6}
+            scrollHideDelay={1000}
+            sx={(theme) => ({
+              height: 700,
+              display: 'flex',
+              position: 'relative',
+            })}
+          >
+            {sideBarShowing && (
+              <Section
+                sx={{
+                  position: 'absolute',
+                  width: 150,
+                  height: 700,
+                  backgroundColor: 'rgba(0,0,0,0.5)',
+                  backdropFilter: 'blur(3px)',
+                }}
+              >
+                <Section
+                  sx={{
+                    zIndex: 3,
+                    background: 'none',
+                  }}
+                >
+                  <Text
+                    sx={(theme) => ({
+                      color: theme.colors.gray[3],
+                    })}
+                  >
+                    NavBar
+                  </Text>
+                </Section>
+              </Section>
+            )}
+            {sideBarShowing && true && (
+              <Section
+                sx={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 150,
+                  width: 150,
+                  height: 700,
+                  backgroundColor: 'rgba(0,0,0,0.5)',
+                  backdropFilter: 'blur(3px)',
+                }}
+              >
+                <Section
+                  sx={{
+                    zIndex: 3,
+                    background: 'none',
+                  }}
+                >
+                  <Text
+                    sx={(theme) => ({
+                      color: theme.colors.gray[3],
+                    })}
+                  >
+                    NavBar
+                  </Text>
+                </Section>
+              </Section>
+            )}
+
+            <Section>{children}</Section>
+          </ScrollArea>
+
+          <Section
+            sx={{
+              height: 50,
+              borderTopWidth: borderWidth,
+              borderTopColor: borderColor,
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            Footer
+          </Section>
+        </Section>
+      </Center>
+    </BackgroundImage>
   )
 }
 
