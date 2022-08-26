@@ -9,18 +9,23 @@ import {
   Text,
   useMantineTheme,
 } from '@mantine/core'
+import { NextLink } from '@mantine/next'
 
 import { NextPage } from 'next'
+import { useRouter } from 'next/router'
 import { useSidebarContext } from '../context/SidebarContext'
 import { Resizable } from '../lib/re-resizable'
 import Clock from './Clock'
 import SideBar from './SideBar'
+import SubSideBar from './SubSideBar'
+import ThemeModeToggle from './ThemeModeToggle'
 
 interface LayoutProps {
   children: React.ReactNode
 }
 
 const Layout: NextPage<LayoutProps> = ({ children }) => {
+  const router = useRouter()
   const { toggleSideBar, sideBarShowing, subSideBarLabel } = useSidebarContext()
   const theme = useMantineTheme()
   const isDark = theme.colorScheme === 'dark'
@@ -36,6 +41,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
               width: theme.breakpoints.xl,
             },
             height: 800,
+            minHeight: 800,
             borderRadius: theme.radius.md,
             overflow: 'hidden',
             borderWidth: theme.other.borderWidth,
@@ -94,7 +100,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
                   alignItems: 'center',
                 }}
               >
-                <Box>
+                <Box component={NextLink} href={'/'} sx={{ cursor: 'pointer' }}>
                   <Text>Geony Devnotes</Text>
                 </Box>
               </Grid.Col>
@@ -110,16 +116,19 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
                   <Text>Search</Text>
                 </Box>
               </Grid.Col>
+              <Grid.Col span={1}>
+                <ThemeModeToggle />
+              </Grid.Col>
               <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
                 <Grid.Col
-                  span={3}
+                  span={1}
                   sx={{
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'flex-end',
                   }}
                 >
-                  <Box>
+                  <Box sx={{ fontSize: theme.fontSizes.sm }}>
                     <Clock />
                   </Box>
                 </Grid.Col>
@@ -150,37 +159,29 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
                 }}
               >
                 <Resizable
-                  style={{
-                    backgroundColor: 'rgba(56,56,56,0.6)',
-                    backdropFilter: 'blur(4px)',
-                  }}
                   defaultSize={{
                     width: 150,
-                    height: 700,
+                    height: '100%',
                   }}
                   maxWidth={300}
                   minWidth={100}
-                  minHeight={700}
-                  maxHeight={700}
+                  minHeight={'100%'}
+                  maxHeight={'100%'}
                 >
                   <SideBar />
                 </Resizable>
-                {true && (
+                {subSideBarLabel && (
                   <Resizable
-                    style={{
-                      backgroundColor: 'rgba(56,56,56,0.8)',
-                      backdropFilter: 'blur(4px)',
-                    }}
                     defaultSize={{
                       width: 150,
-                      height: 700,
+                      height: '100%',
                     }}
                     maxWidth={300}
                     minWidth={100}
-                    minHeight={700}
-                    maxHeight={700}
+                    minHeight={'100%'}
+                    maxHeight={'100%'}
                   >
-                    Sub NavBar
+                    <SubSideBar />
                   </Resizable>
                 )}
               </Box>
@@ -190,18 +191,19 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
           </ScrollArea>
           <Box
             sx={{
-              height: 50,
+              height: 30,
               borderTopWidth: theme.other.borderWidth,
               borderTopColor: theme.other.borderColor,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
+              fontSize: theme.fontSizes.sm,
               backgroundColor: isDark
                 ? theme.colors.dark[6]
                 : theme.colors.dark[0],
             }}
           >
-            Footer
+            path: {(router.asPath as string) || ''}
           </Box>
         </Box>
       </Center>

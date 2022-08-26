@@ -1,28 +1,66 @@
-import Link from 'next/link'
+import {
+  Box,
+  Center,
+  Navbar,
+  ScrollArea,
+  Text,
+  useMantineTheme,
+} from '@mantine/core'
+import { NextLink } from '@mantine/next'
+import { IconChevronsLeft } from '@tabler/icons'
 import { useSidebarContext } from '../context/SidebarContext'
 import useGetNotes from '../hooks/useGetNotes'
 
 export default function SubSideBar() {
-  const { subSideBarLabel, saveSubSideBarLabel } = useSidebarContext()
+  const { toggleSideBar, subSideBarLabel, saveSubSideBarLabel } =
+    useSidebarContext()
+  const theme = useMantineTheme()
   const notes = useGetNotes(subSideBarLabel)
   const onDismiss = () => saveSubSideBarLabel(null)
   return (
-    <div className='full overflow-y-auto overflow-x-hidden'>
-      <div className='flex justify-between'>
-        <h3 className='sidebar-title'>{subSideBarLabel?.title}</h3>
-        <div onClick={() => onDismiss()} className='cursor-pointer'>
-          <span>X</span>
-        </div>
-      </div>
-      <ul className='sidebar-ul'>
+    <Navbar
+      p={10}
+      sx={{
+        backgroundColor: 'rgba(23,23,23,0.6)',
+        backdropFilter: 'blur(4px)',
+      }}
+    >
+      <Navbar.Section
+        sx={{
+          color: theme.colors.gray[2],
+          fontSize: theme.fontSizes.md,
+          fontWeight: 600,
+        }}
+      >
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}
+        >
+          <Text>{subSideBarLabel?.title}</Text>
+          <Center
+            sx={{ cursor: 'pointer', width: 23, height: 23, marginRight: 5 }}
+            onClick={() => onDismiss()}
+          >
+            <IconChevronsLeft />
+          </Center>
+        </Box>
+      </Navbar.Section>
+      <Navbar.Section grow component={ScrollArea} p={5}>
         {notes.map((note, i) => (
-          <Link key={i} href={`/notes/${note.slug}`}>
-            <li className='w-full cursor-pointer whitespace-nowrap'>
-              <a className='text-sm font-light'>{note.title}</a>
-            </li>
-          </Link>
+          <Box
+            key={i}
+            component={NextLink}
+            href={`/notes/${note.slug}`}
+            sx={{ cursor: 'pointer', fontSize: theme.fontSizes.sm }}
+            onClick={() => toggleSideBar()}
+          >
+            {note.title}
+          </Box>
         ))}
-      </ul>
-    </div>
+      </Navbar.Section>
+    </Navbar>
   )
 }

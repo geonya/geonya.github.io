@@ -9,7 +9,7 @@ import * as React from 'react'
 // } as const
 
 const colSizeBase = {
-  width: '30px',
+  width: '10px',
   height: '100%',
   top: '0px',
   left: '0px',
@@ -31,7 +31,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   right: {
     ...colSizeBase,
     left: undefined,
-    right: '-10px',
+    right: '0px',
   },
   // bottom: {
   //   ...rowSizeBase,

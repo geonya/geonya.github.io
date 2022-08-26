@@ -1,4 +1,4 @@
-import { Box, Text, Title, useMantineTheme } from '@mantine/core'
+import { Box, Navbar, ScrollArea, Text, useMantineTheme } from '@mantine/core'
 import { ALL_NOTES } from '../constants/notebook.constants'
 import { useNoteContext } from '../context/NoteContext'
 import { useSidebarContext } from '../context/SidebarContext'
@@ -10,52 +10,68 @@ export default function SideBar() {
   const tags = extractTags(totalNotes)
   const theme = useMantineTheme()
   return (
-    <Box>
-      <div className='notes'>
-        <Text
-          sx={{ color: theme.colors.gray[3] }}
-          onClick={() =>
-            saveSubSideBarLabel({
-              type: 'note',
-              title: ALL_NOTES,
-            })
-          }
-        >
-          All Notes +
-        </Text>
-        <ul className='sidebar-ul'>
-          {totalNotes.map(({ notebook }, i) => (
-            <li
-              key={i}
-              className='cursor-pointer'
-              onClick={() =>
-                saveSubSideBarLabel({
-                  type: 'note',
-                  title: notebook,
-                })
-              }
-            >
-              <a className='text-sm font-light'>{notebook}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className='mt-10'>
-        <h3 className='sidebar-title mb-2'>Tags +</h3>
-        <ul className='sidebar-ul'>
-          {tags.map((tag, i) => (
-            <li
-              key={i}
-              className='cursor-pointer'
-              onClick={() =>
-                saveSubSideBarLabel({ type: 'tag', title: tag.name })
-              }
-            >
-              <a className='text-sm font-light'>{tag.name}</a>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </Box>
+    <Navbar
+      p={10}
+      sx={{
+        backgroundColor: 'rgba(56,56,56,0.5)',
+        backdropFilter: 'blur(4px)',
+      }}
+    >
+      <Navbar.Section
+        sx={{
+          color: theme.colors.gray[2],
+          fontSize: theme.fontSizes.md,
+          fontWeight: 600,
+          cursor: 'pointer',
+        }}
+        onClick={() =>
+          saveSubSideBarLabel({
+            type: 'note',
+            title: ALL_NOTES,
+          })
+        }
+      >
+        All Notes +
+      </Navbar.Section>
+      <Navbar.Section grow component={ScrollArea} p={5}>
+        {totalNotes.map(({ notebook }, i) => (
+          <Text
+            key={i}
+            sx={{ cursor: 'pointer', fontSize: theme.fontSizes.sm }}
+            onClick={() =>
+              saveSubSideBarLabel({
+                type: 'note',
+                title: notebook,
+              })
+            }
+          >
+            {notebook}
+          </Text>
+        ))}
+      </Navbar.Section>
+      <Navbar.Section
+        sx={{
+          color: theme.colors.gray[2],
+          fontSize: theme.fontSizes.md,
+          fontWeight: 600,
+          cursor: 'pointer',
+        }}
+      >
+        Tags +
+      </Navbar.Section>
+      <Navbar.Section grow component={ScrollArea} p={5}>
+        {tags.map((tag, i) => (
+          <Text
+            key={i}
+            sx={{ cursor: 'pointer', fontSize: theme.fontSizes.sm }}
+            onClick={() =>
+              saveSubSideBarLabel({ type: 'tag', title: tag.name })
+            }
+          >
+            {tag.name}
+          </Text>
+        ))}
+      </Navbar.Section>
+    </Navbar>
   )
 }
