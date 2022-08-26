@@ -14,8 +14,9 @@ import { NextLink } from '@mantine/next'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useSidebarContext } from '../context/SidebarContext'
-import { Resizable } from '../lib/re-resizable'
+import { Resizable } from '../lib/layout-resizable'
 import Clock from './Clock'
+import Search from './Search'
 import SideBar from './SideBar'
 import SubSideBar from './SubSideBar'
 import ThemeModeToggle from './ThemeModeToggle'
@@ -112,9 +113,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
                   alignItems: 'center',
                 }}
               >
-                <Box>
-                  <Text>Search</Text>
-                </Box>
+                <Search />
               </Grid.Col>
               <Grid.Col span={1}>
                 <ThemeModeToggle />

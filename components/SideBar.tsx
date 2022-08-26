@@ -13,7 +13,7 @@ export default function SideBar() {
     <Navbar
       p={10}
       sx={{
-        backgroundColor: 'rgba(56,56,56,0.5)',
+        backgroundColor: 'rgba(56,56,56,0.5w)',
         backdropFilter: 'blur(4px)',
       }}
     >

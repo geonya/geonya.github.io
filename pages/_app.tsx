@@ -12,6 +12,7 @@ import {
 } from '@mantine/core'
 import { useState } from 'react'
 import GlobalStyles from '../components/GlobalStyles'
+import { SpotlightProvider } from '@mantine/spotlight'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [colorScheme, setColorScheme] = useState<ColorScheme>('dark')
@@ -52,10 +53,30 @@ function MyApp({ Component, pageProps }: AppProps) {
                 },
               }}
             >
-              <GlobalStyles />
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
+              <SpotlightProvider
+                nothingFoundMessage='Nothing found...'
+                shortcut={['mod + P', 'mod + K', '/']}
+                actions={[]}
+                filter={(query, actions) =>
+                  actions.filter(
+                    (action) =>
+                      action.title
+                        .toLowerCase()
+                        .includes(query.toLowerCase()) ||
+                      action.description
+                        ?.toLowerCase()
+                        .includes(query.toLowerCase()) ||
+                      action.content
+                        ?.toLowerCase()
+                        .includes(query.toLowerCase()),
+                  )
+                }
+              >
+                <GlobalStyles />
+                <Layout>
+                  <Component {...pageProps} />
+                </Layout>
+              </SpotlightProvider>
             </MantineProvider>
           </ColorSchemeProvider>
         </SidebarContextProiver>

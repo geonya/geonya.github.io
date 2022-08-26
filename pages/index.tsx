@@ -7,7 +7,7 @@ import fs from 'fs'
 import path from 'path'
 import { NOTES_DIR } from '../constants/notebook.constants'
 import matter from 'gray-matter'
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
+import { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import MDX from '../components/MDX'
 interface HomeProps {
   totalNotes: INote[]
