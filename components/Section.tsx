@@ -1,7 +1,7 @@
 import { Box, Sx, useMantineTheme } from '@mantine/core'
 
 interface SectionProps {
-  children: React.ReactNode
+  children?: React.ReactNode
   sx?: Sx
 }
 

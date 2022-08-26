@@ -8,6 +8,7 @@ import {
   Center,
   Grid,
   MediaQuery,
+  NavLink,
   ScrollArea,
   SimpleGrid,
   Stack,
@@ -15,17 +16,17 @@ import {
   useMantineTheme,
 } from '@mantine/core'
 import { useMediaQuery, useViewportSize } from '@mantine/hooks'
+import { IconGauge } from '@tabler/icons'
 import { NextPage } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useSidebarContext } from '../context/SidebarContext'
 import metaData from '../data/metaData'
+import { Resizable } from '../lib/re-resizable'
 import Clock from './Clock'
 import Search from './Search'
 import Section from './Section'
-import SideBar from './SideBar'
-import SubSideBar from './SubSideBar'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -40,6 +41,14 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
   const borderColor =
     theme.colorScheme === 'dark' ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.2)'
   const dark = theme.colorScheme === 'dark'
+
+  const style = {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    border: 'solid 1px #ddd',
+    background: '#f0f0f0',
+  }
   return (
     <BackgroundImage src={'/images/base-background-img.jpeg'}>
       <Center sx={{ width: '100vw', height: '100vh' }}>
@@ -144,64 +153,45 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
             scrollHideDelay={1000}
             sx={(theme) => ({
               height: 700,
-              display: 'flex',
               position: 'relative',
             })}
           >
-            {sideBarShowing && (
-              <Section
-                sx={{
-                  position: 'absolute',
-                  width: 150,
+            <Box
+              sx={{
+                width: '100%',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                display: 'flex',
+              }}
+            >
+              <Resizable
+                style={{ backgroundColor: 'red' }}
+                defaultSize={{
+                  width: 300,
                   height: 700,
-                  backgroundColor: 'rgba(0,0,0,0.5)',
-                  backdropFilter: 'blur(3px)',
                 }}
+                maxWidth={600}
+                minWidth={1}
+                minHeight={700}
+                maxHeight={700}
               >
-                <Section
-                  sx={{
-                    zIndex: 3,
-                    background: 'none',
-                  }}
-                >
-                  <Text
-                    sx={(theme) => ({
-                      color: theme.colors.gray[3],
-                    })}
-                  >
-                    NavBar
-                  </Text>
-                </Section>
-              </Section>
-            )}
-            {sideBarShowing && true && (
-              <Section
-                sx={{
-                  position: 'absolute',
-                  top: 0,
-                  left: 150,
-                  width: 150,
+                001
+              </Resizable>
+              <Resizable
+                style={{ backgroundColor: 'blue' }}
+                defaultSize={{
+                  width: 300,
                   height: 700,
-                  backgroundColor: 'rgba(0,0,0,0.5)',
-                  backdropFilter: 'blur(3px)',
                 }}
+                maxWidth={600}
+                minWidth={1}
+                minHeight={700}
+                maxHeight={700}
               >
-                <Section
-                  sx={{
-                    zIndex: 3,
-                    background: 'none',
-                  }}
-                >
-                  <Text
-                    sx={(theme) => ({
-                      color: theme.colors.gray[3],
-                    })}
-                  >
-                    NavBar
-                  </Text>
-                </Section>
-              </Section>
-            )}
+                002
+              </Resizable>
+            </Box>
 
             <Section>{children}</Section>
           </ScrollArea>
