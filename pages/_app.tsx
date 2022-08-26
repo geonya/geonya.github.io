@@ -8,14 +8,16 @@ import {
   ColorScheme,
   ColorSchemeProvider,
   MantineProvider,
+  useMantineTheme,
 } from '@mantine/core'
 import { useState } from 'react'
 import GlobalStyles from '../components/GlobalStyles'
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const [colorScheme, setColorScheme] = useState<ColorScheme>('light')
+  const [colorScheme, setColorScheme] = useState<ColorScheme>('dark')
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'))
+  const theme = useMantineTheme()
   return (
     <>
       <NoteContextProvider>
@@ -41,6 +43,13 @@ function MyApp({ Component, pageProps }: AppProps) {
                   lg: 1275,
                   xl: 1600,
                 },
+                other: {
+                  borderWidth: '1px',
+                  borderColor:
+                    theme.colorScheme === 'dark'
+                      ? 'rgba(255,255,255,0.2)'
+                      : 'rgba(0,0,0,0.2)',
+                },
               }}
             >
               <GlobalStyles />
@@ -56,3 +65,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 }
 
 export default MyApp
+
+declare module '@mantine/core' {
+  export interface MantineThemeOther {
+    borderWidth: string
+    borderColor: string
+  }
+}

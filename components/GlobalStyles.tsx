@@ -7,7 +7,7 @@ export default function GlobalStyles() {
         '*, *::before, *::after': { boxSizing: 'border-box' },
         body: {
           ...theme.fn.fontStyles(),
-          fontSize: theme.fontSizes.sm,
+          fontSize: theme.fontSizes.md,
           lineHeight: theme.lineHeight,
           color:
             theme.colorScheme === 'dark'

@@ -1,3 +1,4 @@
+import { Box, Text, Title, useMantineTheme } from '@mantine/core'
 import { ALL_NOTES } from '../constants/notebook.constants'
 import { useNoteContext } from '../context/NoteContext'
 import { useSidebarContext } from '../context/SidebarContext'
@@ -7,11 +8,12 @@ export default function SideBar() {
   const { totalNotes } = useNoteContext()
   const { saveSubSideBarLabel } = useSidebarContext()
   const tags = extractTags(totalNotes)
+  const theme = useMantineTheme()
   return (
-    <div className='full overflow-y-auto'>
-      <div className=''>
-        <h3
-          className='sidebar-title mb-2'
+    <Box>
+      <div className='notes'>
+        <Text
+          sx={{ color: theme.colors.gray[3] }}
           onClick={() =>
             saveSubSideBarLabel({
               type: 'note',
@@ -20,7 +22,7 @@ export default function SideBar() {
           }
         >
           All Notes +
-        </h3>
+        </Text>
         <ul className='sidebar-ul'>
           {totalNotes.map(({ notebook }, i) => (
             <li
@@ -54,6 +56,6 @@ export default function SideBar() {
           ))}
         </ul>
       </div>
-    </div>
+    </Box>
   )
 }

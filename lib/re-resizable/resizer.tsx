@@ -9,11 +9,12 @@ import * as React from 'react'
 // } as const
 
 const colSizeBase = {
-  width: '10px',
+  width: '30px',
   height: '100%',
   top: '0px',
   left: '0px',
   cursor: 'col-resize',
+  position: 'absolute',
 } as const
 
 // const edgeBase = {
@@ -30,7 +31,7 @@ const styles: { [key: string]: React.CSSProperties } = {
   right: {
     ...colSizeBase,
     left: undefined,
-    right: '0px',
+    right: '-10px',
   },
   // bottom: {
   //   ...rowSizeBase,
