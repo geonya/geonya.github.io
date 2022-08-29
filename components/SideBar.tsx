@@ -13,8 +13,9 @@ export default function SideBar() {
     <Navbar
       p={10}
       sx={{
-        backgroundColor: 'rgba(56,56,56,0.5w)',
+        backgroundColor: 'rgba(56,56,56,0.5)',
         backdropFilter: 'blur(4px)',
+        border: 'none',
       }}
     >
       <Navbar.Section
@@ -37,7 +38,11 @@ export default function SideBar() {
         {totalNotes.map(({ notebook }, i) => (
           <Text
             key={i}
-            sx={{ cursor: 'pointer', fontSize: theme.fontSizes.sm }}
+            sx={{
+              cursor: 'pointer',
+              fontSize: theme.fontSizes.sm,
+              color: theme.colors.gray[3],
+            }}
             onClick={() =>
               saveSubSideBarLabel({
                 type: 'note',
@@ -63,7 +68,11 @@ export default function SideBar() {
         {tags.map((tag, i) => (
           <Text
             key={i}
-            sx={{ cursor: 'pointer', fontSize: theme.fontSizes.sm }}
+            sx={{
+              cursor: 'pointer',
+              fontSize: theme.fontSizes.sm,
+              color: theme.colors.gray[3],
+            }}
             onClick={() =>
               saveSubSideBarLabel({ type: 'tag', title: tag.name })
             }

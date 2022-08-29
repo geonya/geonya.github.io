@@ -6,6 +6,7 @@ import {
   Grid,
   MediaQuery,
   ScrollArea,
+  Space,
   Text,
   useMantineTheme,
 } from '@mantine/core'
@@ -41,8 +42,8 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
             [`@media (min-width: ${theme.breakpoints.xl}px)`]: {
               width: theme.breakpoints.xl,
             },
-            height: 800,
-            minHeight: 800,
+            height: 780,
+            minHeight: 780,
             borderRadius: theme.radius.md,
             overflow: 'hidden',
             borderWidth: theme.other.borderWidth,
@@ -163,7 +164,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
                     height: '100%',
                   }}
                   maxWidth={300}
-                  minWidth={100}
+                  minWidth={110}
                   minHeight={'100%'}
                   maxHeight={'100%'}
                 >
@@ -176,13 +177,18 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
                       height: '100%',
                     }}
                     maxWidth={300}
-                    minWidth={100}
+                    minWidth={110}
                     minHeight={'100%'}
                     maxHeight={'100%'}
                   >
                     <SubSideBar />
                   </Resizable>
                 )}
+                <div
+                  className='sidebar-background-click-closing'
+                  onClick={() => toggleSideBar()}
+                  style={{ flex: 1 }}
+                />
               </Box>
             )}
 

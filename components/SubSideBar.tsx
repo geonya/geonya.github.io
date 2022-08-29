@@ -23,6 +23,7 @@ export default function SubSideBar() {
       sx={{
         backgroundColor: 'rgba(23,23,23,0.6)',
         backdropFilter: 'blur(4px)',
+        border: 'none',
       }}
     >
       <Navbar.Section
@@ -54,7 +55,11 @@ export default function SubSideBar() {
             key={i}
             component={NextLink}
             href={`/notes/${note.slug}`}
-            sx={{ cursor: 'pointer', fontSize: theme.fontSizes.sm }}
+            sx={{
+              cursor: 'pointer',
+              fontSize: theme.fontSizes.sm,
+              color: theme.colors.gray[3],
+            }}
             onClick={() => toggleSideBar()}
           >
             {note.title}

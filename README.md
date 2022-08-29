@@ -28,13 +28,17 @@
 - [x] All Notes Bug Fix (issue : if else)
 - [x] DaisyUI setup
 - [x] Tailwind-Typography setup
-  - [ ] code block prose color bug
 - [x] Showing mdx Metadata
 - [x] Test Deploy in vercel
-- [ ] 모바일 코드뷰 확대 방지 ?
-- [ ] Mantine 로 refactoring ?
-- [ ] layout detail design
-- [ ] Dark mode / Light mode
+- [x] MantineUI Refactoring
+- [x] layout detail design
+- [x] Resizable SideBar Layout
+- [x] Dark mode / Light mode
+- [x] Footer Border Bug Fix
+- [ ] Clock Delete Seconds
+- [ ] MDX Component
 - [ ] Search
-- [ ] Comment
+  - [x] Spotlight Setup
+  - [ ] Search Button Design
+- [ ] Comment (github)
 - [x] Deploy in Github Page 🚀
