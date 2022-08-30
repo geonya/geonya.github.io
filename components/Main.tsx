@@ -1,11 +1,7 @@
-import { Box, ScrollArea } from '@mantine/core'
+import { ScrollArea } from '@mantine/core'
 import React from 'react'
-import { useSidebarContext } from '../context/SidebarContext'
-import SideBar from './SideBar'
-import SubSideBar from './SubSideBar'
 
 export default function Main({ children }: { children: React.ReactNode }) {
-  const { toggleSideBar, sideBarShowing, subSideBarLabel } = useSidebarContext()
   return (
     <ScrollArea
       scrollbarSize={6}
@@ -17,27 +13,7 @@ export default function Main({ children }: { children: React.ReactNode }) {
         overflow: 'hidden',
       }}
     >
-      {sideBarShowing && (
-        <Box
-          sx={{
-            width: '100%',
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            display: 'flex',
-          }}
-        >
-          <SideBar />
-          {subSideBarLabel && <SubSideBar />}
-          <div
-            className='sidebar-background-click-closing'
-            onClick={() => toggleSideBar()}
-            style={{ flex: 1 }}
-          />
-        </Box>
-      )}
-
-      <Box>{children}</Box>
+      {children}
     </ScrollArea>
   )
 }

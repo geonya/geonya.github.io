@@ -2,7 +2,6 @@ import {
   Box,
   Container,
   Group,
-  List,
   Text,
   Title,
   useMantineTheme,
@@ -10,18 +9,18 @@ import {
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { useSidebarContext } from '../context/SidebarContext'
 import useIsDark from '../hooks/useIsDark'
-import { IMetaData } from '../types/types'
+import { IFrontData } from '../types/types'
 import Code from './template/Code'
 import useStyles from '../components/template/Components.styles'
 
 interface MDXProps {
   source: MDXRemoteSerializeResult<Record<string, unknown>>
-  metaData: IMetaData
+  frontData: IFrontData
 }
 const components = {
   code: Code,
 }
-export default function MDX({ source, metaData }: MDXProps) {
+export default function MDX({ source, frontData }: MDXProps) {
   const isDark = useIsDark()
   const { toggleSideBar, saveSubSideBarLabel } = useSidebarContext()
   const onTagClick = (tagName: string) => {
@@ -69,15 +68,15 @@ export default function MDX({ source, metaData }: MDXProps) {
           overflow: 'hidden',
         }}
       >
-        <Title>{metaData?.title}</Title>
+        <Title>{frontData?.title}</Title>
         <Group>
           <Text>Geony</Text>
           <Text sx={{ fontSize: theme.fontSizes.sm }}>
-            {metaData?.createdAt}
+            {frontData?.createdAt}
           </Text>
         </Group>
         <Group spacing={10} sx={{ display: 'flex' }}>
-          {metaData?.tags?.map((tagName, i) => (
+          {frontData?.tags?.map((tagName, i) => (
             <Box
               key={i}
               onClick={() => onTagClick(tagName)}

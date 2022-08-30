@@ -12,11 +12,17 @@ export interface INote {
   createdAt: string
 }
 
-export interface IMetaData {
+export interface IFrontData {
   title: string
   tags: string[]
   notebook: string
   createdAt: string
+}
+
+export interface PageProps {
+  totalNotes: INote[]
+  frontData: IFrontData
+  source: MDXRemoteSerializeResult<Record<string, unknown>>
 }
 
 export type PropsType = { children?: React.ReactNode; className?: string }

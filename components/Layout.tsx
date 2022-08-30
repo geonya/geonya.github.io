@@ -1,9 +1,11 @@
 import { BackgroundImage, Box, Center, useMantineTheme } from '@mantine/core'
 import { NextPage } from 'next'
+import { MAIN_HEIGHT } from '../constants/styles.constants'
 import useIsDark from '../hooks/useIsDark'
 import Footer from './Footer'
 import Header from './Header'
 import Main from './Main'
+import SideBarWrapper from './SideBarWrapper'
 
 interface LayoutProps {
   children: React.ReactNode
@@ -23,8 +25,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
             [`@media (min-width: ${theme.breakpoints.xl}px)`]: {
               width: theme.breakpoints.xl,
             },
-            height: 780,
-            minHeight: 780,
+            height: MAIN_HEIGHT,
             borderRadius: theme.radius.md,
             overflow: 'hidden',
             border: `1px solid ${
@@ -36,7 +37,10 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
           }}
         >
           <Header />
-          <Main>{children}</Main>
+          <Main>
+            <SideBarWrapper />
+            {children}
+          </Main>
           <Footer />
         </Box>
       </Center>

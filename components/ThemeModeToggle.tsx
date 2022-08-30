@@ -9,7 +9,6 @@ import { IconSun, IconMoonStars } from '@tabler/icons'
 const useStyles = createStyles((theme) => ({
   root: {
     position: 'relative',
-    cursor: 'pointer',
     '& *': {
       cursor: 'pointer',
     },
