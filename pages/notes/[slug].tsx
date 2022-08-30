@@ -20,7 +20,7 @@ export const getStaticPaths: GetStaticPaths = () => {
 
 export const getStaticProps = async ({ params }: IParams) => {
   const { slug } = params
-  const mdxData = makeMDXdata(slug + '.mdx')
+  const mdxData = await makeMDXdata(slug + '.mdx')
   return {
     props: {
       totalNotes: getTotalNotes(),

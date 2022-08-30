@@ -10,7 +10,7 @@ import makeMDXdata from '../lib/makeMDXdata'
 
 export const getStaticProps: GetStaticProps = async () => {
   const notes = fs.readdirSync(path.join(process.cwd(), NOTES_DIR))
-  const mdxData = makeMDXdata(notes[0])
+  const mdxData = await makeMDXdata(notes[0])
   return {
     props: {
       totalNotes: getTotalNotes(),
