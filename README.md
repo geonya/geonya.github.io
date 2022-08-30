@@ -39,10 +39,10 @@
 - [x] SubSideBar Title Bug Fix
 - [ ] Class Refactoring
 - [ ] CreatedAt Date Type
-- [ ] SideBar Icons
-- [ ] MDX Component
-- [ ] Search
+- [x] SideBar Icons
+- [x] MDX Component
+- [x] Search
   - [x] Spotlight Setup
-  - [ ] Search Button Design
+  - [x] Search Button Design
 - [ ] Comment (github)
 - [x] Deploy in Github Page 🚀

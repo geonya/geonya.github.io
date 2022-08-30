@@ -15,6 +15,7 @@ interface NoteProps {
   totalNotes: INote[]
   metaData: IMetaData
   source: MDXRemoteSerializeResult<Record<string, unknown>>
+  content: string
 }
 
 interface IParams {
@@ -37,7 +38,9 @@ export const getStaticProps = async ({ params }: IParams) => {
     'utf-8',
   )
   const { data: metaData, content } = matter(markdown)
+  console.log(content)
   const source = await serialize(content)
+  console.log(source)
   return {
     props: {
       totalNotes: getTotalNotes(),
@@ -49,9 +52,9 @@ export const getStaticProps = async ({ params }: IParams) => {
 interface NoteProps {
   note: string[]
 }
-const Note = ({ totalNotes, source, metaData }: NoteProps) => {
+const Note = ({ totalNotes, source, metaData, content }: NoteProps) => {
   useSaveTotalData(totalNotes)
-  return <MDX source={source} metaData={metaData} />
+  return <MDX source={source} content={content} metaData={metaData} />
 }
 
 export default Note

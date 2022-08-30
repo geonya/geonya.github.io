@@ -4,36 +4,22 @@ import {
   Group,
   Text,
   Title,
+  TypographyStylesProvider,
   useMantineTheme,
 } from '@mantine/core'
+import { Prism } from '@mantine/prism'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { useSidebarContext } from '../context/SidebarContext'
 import useIsDark from '../hooks/useIsDark'
 import { IMetaData, ITag } from '../types/types'
-import Code from './template/Code'
 
 interface MDXProps {
   source: MDXRemoteSerializeResult<Record<string, unknown>>
   metaData: IMetaData
+  content: string
 }
 
-const components = {
-  code: Code,
-  h1: H1,
-  h2: H2,
-  h3: H3,
-  div: Div,
-  p: P,
-  a: A,
-  ul: Ul,
-  li: Li,
-  img: Image,
-  strong: Strong,
-  hr: Hr,
-  blockquote: Blockquote,
-}
-
-export default function MDX({ source, metaData }: MDXProps) {
+export default function MDX({ source, metaData, content }: MDXProps) {
   const isDark = useIsDark()
   const { toggleSideBar, saveSubSideBarLabel } = useSidebarContext()
   const onTagClick = (tagName: string) => {
@@ -48,13 +34,17 @@ export default function MDX({ source, metaData }: MDXProps) {
       sx={{
         flexDirection: 'column',
         alignItems: 'flex-start',
-        maxWidth: theme.breakpoints.sm,
+        width: theme.breakpoints.sm,
+        [`@media (max-width: 500px)`]: {
+          width: 450,
+        },
         whiteSpace: 'normal',
       }}
     >
       <Group
         spacing={15}
         p={10}
+        mx='auto'
         sx={{
           borderRadius: theme.radius.md,
           width: '100%',
@@ -97,7 +87,11 @@ export default function MDX({ source, metaData }: MDXProps) {
           ))}
         </Group>
       </Group>
-      <MDXRemote {...source} components={components} />
+      <TypographyStylesProvider
+        sx={{ width: '100%', fontFamily: 'sans-serif' }}
+      >
+        <div dangerouslySetInnerHTML={{ __html: content }} />
+      </TypographyStylesProvider>
     </Group>
   )
 }
