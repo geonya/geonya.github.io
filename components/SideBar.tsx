@@ -1,4 +1,4 @@
-import { Box, Text, useMantineTheme } from '@mantine/core'
+import { Box, ScrollArea, Text, useMantineTheme } from '@mantine/core'
 import { IconFolder, IconTag } from '@tabler/icons'
 import { ALL_NOTES } from '../constants/notebook.constants'
 import { useNoteContext } from '../context/NoteContext'
@@ -6,7 +6,7 @@ import { useSidebarContext } from '../context/SidebarContext'
 import extractTags from '../lib/extractTags'
 import { Resizable } from '../lib/layout-resizable'
 
-export default function SideBar() {
+export default function SideBar({ height }: { height: number }) {
   const { totalNotes } = useNoteContext()
   const { saveSubSideBarLabel } = useSidebarContext()
   const tags = extractTags(totalNotes)
@@ -15,27 +15,28 @@ export default function SideBar() {
     <Resizable
       defaultSize={{
         width: 160,
-        height: 780,
+        height: height,
       }}
       maxWidth={300}
       minWidth={110}
-      minHeight={780}
-      maxHeight={780}
     >
-      <Box
-        p={10}
+      <ScrollArea
         sx={{
           backgroundColor: 'rgba(56,56,56,0.5)',
           backdropFilter: 'blur(4px)',
+          borderRadius: theme.radius.sm,
           border: 'none',
-          height: '100%',
           overflowY: 'scroll',
+          height: height,
           color: theme.colors.gray[2],
+          [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+            height: height - 70,
+          },
         }}
       >
         <Box
           sx={{
-            marginBottom: 300,
+            marginBottom: 200,
           }}
         >
           <Text
@@ -118,7 +119,7 @@ export default function SideBar() {
             </Box>
           ))}
         </Box>
-      </Box>
+      </ScrollArea>
     </Resizable>
   )
 }

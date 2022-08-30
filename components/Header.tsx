@@ -13,10 +13,12 @@ import Clock from './Clock'
 import Search from './Search'
 import ThemeModeToggle from './ThemeModeToggle'
 import metaData from '../data/metaData'
+import useIsDark from '../hooks/useIsDark'
 
 export default function Header() {
   const { toggleSideBar, sideBarShowing } = useSidebarContext()
   const theme = useMantineTheme()
+  const isDark = useIsDark()
   return (
     <Center
       sx={{
@@ -26,7 +28,16 @@ export default function Header() {
             ? theme.colors.dark[4]
             : theme.colors.dark[0]
         }`,
+        [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+          width: '100%',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          backgroundColor: isDark ? theme.colors.dark[5] : theme.colors.gray[0],
+          zIndex: 888,
+        },
       }}
+      px={5}
     >
       <Grid
         justify='space-between'

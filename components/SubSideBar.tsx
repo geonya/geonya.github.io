@@ -1,11 +1,11 @@
-import { Box, Center, Text, useMantineTheme } from '@mantine/core'
+import { Box, Center, ScrollArea, Text, useMantineTheme } from '@mantine/core'
 import { NextLink } from '@mantine/next'
 import { IconChevronsLeft, IconFileText } from '@tabler/icons'
 import { useSidebarContext } from '../context/SidebarContext'
 import useGetNotes from '../hooks/useGetNotes'
 import { Resizable } from '../lib/layout-resizable'
 
-export default function SubSideBar() {
+export default function SubSideBar({ height }: { height: number }) {
   const { toggleSideBar, subSideBarLabel, saveSubSideBarLabel } =
     useSidebarContext()
   const theme = useMantineTheme()
@@ -15,22 +15,24 @@ export default function SubSideBar() {
     <Resizable
       defaultSize={{
         width: 160,
-        height: 780,
+        height: height,
       }}
       maxWidth={300}
       minWidth={110}
-      minHeight={780}
-      maxHeight={780}
     >
-      <Box
+      <ScrollArea
         p={10}
         sx={{
           color: theme.colors.gray[2],
           backgroundColor: 'rgba(23,23,23,0.6)',
           backdropFilter: 'blur(4px)',
+          borderRadius: theme.radius.sm,
           border: 'none',
-          height: '100%',
+          height: height,
           overflowY: 'scroll',
+          [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+            height: height - 70,
+          },
         }}
       >
         <Box
@@ -69,7 +71,7 @@ export default function SubSideBar() {
             <Text sx={{ fontSize: theme.fontSizes.xs }}>{note.title}</Text>
           </Text>
         ))}
-      </Box>
+      </ScrollArea>
     </Resizable>
   )
 }

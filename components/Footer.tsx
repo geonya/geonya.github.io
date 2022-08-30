@@ -17,6 +17,14 @@ export default function Footer() {
         justifyContent: 'center',
         alignItems: 'center',
         fontSize: theme.fontSizes.sm,
+        [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+          width: '100%',
+          position: 'fixed',
+          bottom: 0,
+          left: 0,
+          backgroundColor: isDark ? theme.colors.dark[5] : theme.colors.gray[0],
+          zIndex: 888,
+        },
       }}
     >
       path: {(router.asPath as string) || ''}

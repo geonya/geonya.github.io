@@ -44,7 +44,6 @@ export default function MDX({ source, frontData }: MDXProps) {
         [`@media (max-width: 380px)`]: {
           width: 380,
         },
-        overflowX: 'hidden',
         whiteSpace: 'normal',
       }}
     >
@@ -60,22 +59,45 @@ export default function MDX({ source, frontData }: MDXProps) {
           [`@media (max-width: 380px)`]: {
             width: 350,
           },
-
           flexDirection: 'column',
+          justifyContent: 'center',
           alignItems: 'center',
           height: 150,
           backgroundColor: isDark ? theme.colors.dark[3] : theme.colors.gray[3],
           overflow: 'hidden',
         }}
       >
-        <Title>{frontData?.title}</Title>
-        <Group>
+        <Title
+          sx={{
+            fontSize: theme.fontSizes.lg,
+            [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+              fontSize: theme.fontSizes.md,
+            },
+          }}
+        >
+          {frontData?.title}
+        </Title>
+        <Group
+          sx={{
+            fontSize: theme.fontSizes.sm,
+            [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+              fontSize: theme.fontSizes.xs,
+            },
+          }}
+        >
           <Text>Geony</Text>
-          <Text sx={{ fontSize: theme.fontSizes.sm }}>
-            {frontData?.createdAt}
-          </Text>
+          <Text>{frontData?.createdAt}</Text>
         </Group>
-        <Group spacing={10} sx={{ display: 'flex' }}>
+        <Group
+          spacing={10}
+          sx={{
+            display: 'flex',
+            fontSize: theme.fontSizes.sm,
+            [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+              fontSize: theme.fontSizes.xs,
+            },
+          }}
+        >
           {frontData?.tags?.map((tagName, i) => (
             <Box
               key={i}
