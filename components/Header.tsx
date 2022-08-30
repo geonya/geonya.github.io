@@ -5,7 +5,6 @@ import {
   Grid,
   MediaQuery,
   Text,
-  Title,
   useMantineTheme,
 } from '@mantine/core'
 import { NextLink } from '@mantine/next'

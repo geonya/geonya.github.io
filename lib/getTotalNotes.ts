@@ -3,7 +3,7 @@ import matter from 'gray-matter'
 import path from 'path'
 import { NOTES_DIR } from '../constants/notebook.constants'
 import { INote, ITag } from '../types/types'
-import { slugToTitle, titleToSlug } from './changeTitle'
+import { titleToSlug } from './changeTitle'
 
 export default function getTotalNotes(): INote[] {
   const noteSlugs = fs.readdirSync(path.join(process.cwd(), `${NOTES_DIR}`))

@@ -1,4 +1,4 @@
-import { Box, Navbar, ScrollArea, Text, useMantineTheme } from '@mantine/core'
+import { Box, Text, useMantineTheme } from '@mantine/core'
 import { IconFolder, IconTag } from '@tabler/icons'
 import { ALL_NOTES } from '../constants/notebook.constants'
 import { useNoteContext } from '../context/NoteContext'

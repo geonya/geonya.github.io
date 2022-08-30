@@ -44,5 +44,6 @@
 - [x] Search
   - [x] Spotlight Setup
   - [x] Search Button Design
+- [x] Responsive Design Fix
 - [ ] Comment (github)
 - [x] Deploy in Github Page 🚀

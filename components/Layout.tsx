@@ -1,8 +1,5 @@
 import { BackgroundImage, Box, Center, useMantineTheme } from '@mantine/core'
-import { NextLink } from '@mantine/next'
 import { NextPage } from 'next'
-import { useRouter } from 'next/router'
-import { useSidebarContext } from '../context/SidebarContext'
 import useIsDark from '../hooks/useIsDark'
 import Footer from './Footer'
 import Header from './Header'

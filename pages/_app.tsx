@@ -7,7 +7,6 @@ import {
   ColorScheme,
   ColorSchemeProvider,
   MantineProvider,
-  useMantineTheme,
 } from '@mantine/core'
 import { useState } from 'react'
 import GlobalStyles from '../styles/GlobalStyles'

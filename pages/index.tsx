@@ -1,5 +1,6 @@
 import fs from 'fs'
 import path from 'path'
+import MDX from '../components/MDX'
 import matter from 'gray-matter'
 import type { GetStaticProps } from 'next'
 import { serialize } from 'next-mdx-remote/serialize'
@@ -8,7 +9,6 @@ import getTotalNotes from '../lib/getTotalNotes'
 import { IMetaData, INote } from '../types/types'
 import { NOTES_DIR } from '../constants/notebook.constants'
 import { MDXRemoteSerializeResult } from 'next-mdx-remote'
-import MDX from '../components/MDX'
 
 interface HomeProps {
   totalNotes: INote[]
