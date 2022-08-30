@@ -30,13 +30,6 @@ export default createStyles((theme) => {
       lineHeight: theme.lineHeight,
       fontSize: theme.fontSizes.md,
       width: '100%',
-      [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
-        width: theme.breakpoints.xs - 100,
-      },
-      [`@media (max-width: 380px)`]: {
-        width: 350,
-      },
-
       [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
         fontSize: theme.fontSizes.sm,
       },
@@ -105,7 +98,10 @@ export default createStyles((theme) => {
             : theme.colors.gray[0],
 
         '& code': {
-          backgroundColor: 'transparent',
+          backgroundColor:
+            theme.colorScheme === 'dark'
+              ? theme.colors.dark[8]
+              : theme.colors.gray[0],
           padding: 0,
           borderRadius: 0,
           color: 'inherit',
@@ -121,8 +117,8 @@ export default createStyles((theme) => {
           theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
         backgroundColor:
           theme.colorScheme === 'dark'
-            ? theme.colors.dark[9]
-            : theme.colors.gray[0],
+            ? theme.colors.dark[8]
+            : theme.colors.gray[3],
         fontFamily: theme.fontFamilyMonospace,
         fontSize: theme.fontSizes.xs,
         border: `1px solid ${

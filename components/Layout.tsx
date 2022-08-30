@@ -20,11 +20,20 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
       <Center sx={{ width: '100vw', height: '100vh' }}>
         <Box
           sx={{
-            [`@media (max-width: ${theme.breakpoints.xl}px)`]: {
-              width: theme.breakpoints.lg,
-            },
             [`@media (min-width: ${theme.breakpoints.xl}px)`]: {
               width: theme.breakpoints.xl,
+            },
+            [`@media (max-width: ${theme.breakpoints.xl}px)`]: {
+              width: theme.breakpoints.xl,
+            },
+            [`@media (max-width: ${theme.breakpoints.lg}px)`]: {
+              width: theme.breakpoints.lg,
+            },
+            [`@media (max-width: ${theme.breakpoints.md}px)`]: {
+              width: theme.breakpoints.md,
+            },
+            [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+              width: theme.breakpoints.sm,
             },
             borderRadius: theme.radius.md,
             border: `1px solid ${

@@ -11,10 +11,10 @@ export default function Main({ children }: { children: React.ReactNode }) {
       sx={{
         height: MAIN_HEIGHT,
         [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+          width: '100vw',
           height: '100vh',
           marginTop: 150,
         },
-        whiteSpace: 'nowrap',
       }}
     >
       {children}

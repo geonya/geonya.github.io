@@ -12,6 +12,7 @@ import useIsDark from '../hooks/useIsDark'
 import { IFrontData } from '../types/types'
 import Code from './template/Code'
 import useStyles from '../components/template/Components.styles'
+import { useViewportSize } from '@mantine/hooks'
 
 interface MDXProps {
   source: MDXRemoteSerializeResult<Record<string, unknown>>
@@ -31,20 +32,19 @@ export default function MDX({ source, frontData }: MDXProps) {
 
   const { classes, cx } = useStyles()
 
+  const { width } = useViewportSize()
+
   return (
-    <Container
+    <Box
+      px={20}
       py={20}
       mx='auto'
-      fluid
       sx={{
-        width: theme.breakpoints.sm,
-        [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
-          width: theme.breakpoints.xs - 100,
-        },
-        [`@media (max-width: 380px)`]: {
-          width: 380,
-        },
+        width: theme.breakpoints.xs,
         whiteSpace: 'normal',
+        [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+          width,
+        },
       }}
     >
       <Group
@@ -53,18 +53,11 @@ export default function MDX({ source, frontData }: MDXProps) {
         sx={{
           borderRadius: theme.radius.md,
           width: '100%',
-          [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
-            width: theme.breakpoints.xs - 100,
-          },
-          [`@media (max-width: 380px)`]: {
-            width: 350,
-          },
           flexDirection: 'column',
           justifyContent: 'center',
           alignItems: 'center',
           height: 150,
-          backgroundColor: isDark ? theme.colors.dark[3] : theme.colors.gray[3],
-          overflow: 'hidden',
+          backgroundColor: isDark ? theme.colors.dark[4] : theme.colors.gray[4],
         }}
       >
         <Title
@@ -125,6 +118,6 @@ export default function MDX({ source, frontData }: MDXProps) {
       <Box className={cx(classes.root)}>
         <MDXRemote {...source} components={components} lazy />
       </Box>
-    </Container>
+    </Box>
   )
 }

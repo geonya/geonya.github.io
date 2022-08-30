@@ -14,13 +14,14 @@ export default function SideBar({ height }: { height: number }) {
   return (
     <Resizable
       defaultSize={{
-        width: 160,
-        height: height,
+        width: 180,
+        height,
       }}
       maxWidth={300}
       minWidth={110}
     >
       <ScrollArea
+        p={10}
         sx={{
           backgroundColor: 'rgba(56,56,56,0.5)',
           backdropFilter: 'blur(4px)',
@@ -30,7 +31,7 @@ export default function SideBar({ height }: { height: number }) {
           height: height,
           color: theme.colors.gray[2],
           [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
-            height: height - 70,
+            height: height - 80,
           },
         }}
       >

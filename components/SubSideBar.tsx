@@ -14,8 +14,8 @@ export default function SubSideBar({ height }: { height: number }) {
   return (
     <Resizable
       defaultSize={{
-        width: 160,
-        height: height,
+        width: 180,
+        height,
       }}
       maxWidth={300}
       minWidth={110}
@@ -31,7 +31,7 @@ export default function SubSideBar({ height }: { height: number }) {
           height: height,
           overflowY: 'scroll',
           [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
-            height: height - 70,
+            height: height - 80,
           },
         }}
       >
