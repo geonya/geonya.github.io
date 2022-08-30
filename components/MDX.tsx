@@ -1,10 +1,18 @@
-import { Box, Group, List, Text, Title, useMantineTheme } from '@mantine/core'
+import {
+  Box,
+  Container,
+  Group,
+  List,
+  Text,
+  Title,
+  useMantineTheme,
+} from '@mantine/core'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { useSidebarContext } from '../context/SidebarContext'
 import useIsDark from '../hooks/useIsDark'
-import { IMetaData, ITag, PropsType } from '../types/types'
-import BlockQuote from './template/Blockquote'
+import { IMetaData } from '../types/types'
 import Code from './template/Code'
+import useStyles from '../components/template/Components.styles'
 
 interface MDXProps {
   source: MDXRemoteSerializeResult<Record<string, unknown>>
@@ -12,45 +20,6 @@ interface MDXProps {
 }
 const components = {
   code: Code,
-  h1: ({ children }: PropsType) => (
-    <Title order={1} mb={20}>
-      {children}
-    </Title>
-  ),
-  h2: ({ children }: PropsType) => (
-    <Title order={2} mb={20}>
-      {children}
-    </Title>
-  ),
-  h3: ({ children }: PropsType) => (
-    <Title order={3} mb={20}>
-      {children}
-    </Title>
-  ),
-  h4: ({ children }: PropsType) => (
-    <Title order={4} mb={20}>
-      {children}
-    </Title>
-  ),
-  div: ({ children }: PropsType) => <Box mb={20}>{children}</Box>,
-  p: ({ children }: PropsType) => <Text mb={20}>{children}</Text>,
-  ul: ({ children }: PropsType) => (
-    <List listStyleType='disc' mb={20}>
-      {children}
-    </List>
-  ),
-  ol: ({ children }: PropsType) => (
-    <List listStyleType='number' mb={20}>
-      {children}
-    </List>
-  ),
-  li: ({ children }: PropsType) => <List.Item mb={5}>{children}</List.Item>,
-  strong: ({ children }: PropsType) => (
-    <Text weight={600} mb={20}>
-      {children}
-    </Text>
-  ),
-  blockquote: BlockQuote,
 }
 export default function MDX({ source, metaData }: MDXProps) {
   const isDark = useIsDark()
@@ -61,27 +30,38 @@ export default function MDX({ source, metaData }: MDXProps) {
   }
   const theme = useMantineTheme()
 
+  const { classes, cx } = useStyles()
+
   return (
-    <Group
-      p={20}
+    <Container
+      py={20}
       mx='auto'
+      fluid
       sx={{
-        flexDirection: 'column',
-        alignItems: 'flex-start',
         width: theme.breakpoints.sm,
-        [`@media (max-width: 500px)`]: {
-          width: 450,
+        [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+          width: theme.breakpoints.xs - 100,
         },
+        [`@media (max-width: 380px)`]: {
+          width: 380,
+        },
+        overflowX: 'hidden',
         whiteSpace: 'normal',
       }}
     >
       <Group
         spacing={15}
         p={10}
-        mx='auto'
         sx={{
           borderRadius: theme.radius.md,
           width: '100%',
+          [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+            width: theme.breakpoints.xs - 100,
+          },
+          [`@media (max-width: 380px)`]: {
+            width: 350,
+          },
+
           flexDirection: 'column',
           alignItems: 'center',
           height: 150,
@@ -121,9 +101,9 @@ export default function MDX({ source, metaData }: MDXProps) {
           ))}
         </Group>
       </Group>
-      <Box sx={{ width: '100%' }}>
+      <Box className={cx(classes.root)}>
         <MDXRemote {...source} components={components} lazy />
       </Box>
-    </Group>
+    </Container>
   )
 }

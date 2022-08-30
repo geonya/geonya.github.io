@@ -12,6 +12,7 @@ import {
 import { useState } from 'react'
 import GlobalStyles from '../styles/GlobalStyles'
 import { SpotlightProvider } from '@mantine/spotlight'
+import myTheme from '../styles/myTheme'
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [colorScheme, setColorScheme] = useState<ColorScheme>('dark')
@@ -30,20 +31,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             colorScheme={colorScheme}
             toggleColorScheme={toggleColorScheme}
           >
-            <MantineProvider
-              withGlobalStyles
-              withNormalizeCSS
-              theme={{
-                colorScheme,
-                breakpoints: {
-                  xs: 500,
-                  sm: 800,
-                  md: 1000,
-                  lg: 1275,
-                  xl: 1600,
-                },
-              }}
-            >
+            <MantineProvider withGlobalStyles withNormalizeCSS theme={myTheme}>
               <SpotlightProvider
                 nothingFoundMessage='Nothing found...'
                 shortcut={['mod + P', 'mod + K', '/']}

@@ -1,4 +1,4 @@
-import { Group, Text, useMantineTheme } from '@mantine/core'
+import { Group, MediaQuery, Text, useMantineTheme } from '@mantine/core'
 import { useSpotlight } from '@mantine/spotlight'
 import { IconSearch } from '@tabler/icons'
 import { useNoteContext } from '../context/NoteContext'
@@ -12,9 +12,26 @@ export default function Search() {
   return (
     <Group
       py={5}
-      px={7}
+      px={10}
       sx={{
+        [`@media (min-width: ${theme.breakpoints.xl}px)`]: {
+          width: '100%',
+          maxWidth: 240,
+        },
+        [`@media (max-width: ${theme.breakpoints.xl}px)`]: {
+          width: '100%',
+          maxWidth: 240,
+        },
+        [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+          width: '100%',
+        },
+        [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+          width: 30,
+          height: 30,
+          borderRadius: '50%',
+        },
         display: 'flex',
+        flexWrap: 'nowrap',
         alignItems: 'center',
         justifyContent: 'space-around',
         backgroundColor:
@@ -37,9 +54,15 @@ export default function Search() {
         spotlight.registerActions(actions)
       }}
     >
-      <IconSearch size={15} />
-      <Text sx={{ fontSize: theme.fontSizes.xs }}>Search</Text>
-      <Text sx={{ fontSize: theme.fontSizes.xs }}>⌘ + K</Text>
+      <IconSearch size={16} style={{ flexShrink: 0 }} />
+      <MediaQuery smallerThan='xs' styles={{ display: 'none' }}>
+        <Text sx={{ fontSize: theme.fontSizes.xs }}>Search</Text>
+      </MediaQuery>
+      <MediaQuery smallerThan='xs' styles={{ display: 'none' }}>
+        <Text sx={{ fontSize: theme.fontSizes.xs, whiteSpace: 'nowrap' }}>
+          ⌘ + K
+        </Text>
+      </MediaQuery>
     </Group>
   )
 }

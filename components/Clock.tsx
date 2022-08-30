@@ -10,5 +10,5 @@ export default function Clock() {
       setTime(time)
     }, 1000)
   }, [])
-  return <Text>{time}</Text>
+  return <span>{time}</span>
 }

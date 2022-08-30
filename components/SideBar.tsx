@@ -4,6 +4,7 @@ import { ALL_NOTES } from '../constants/notebook.constants'
 import { useNoteContext } from '../context/NoteContext'
 import { useSidebarContext } from '../context/SidebarContext'
 import extractTags from '../lib/extractTags'
+import { Resizable } from '../lib/layout-resizable'
 
 export default function SideBar() {
   const { totalNotes } = useNoteContext()
@@ -11,102 +12,113 @@ export default function SideBar() {
   const tags = extractTags(totalNotes)
   const theme = useMantineTheme()
   return (
-    <Box
-      p={10}
-      sx={{
-        backgroundColor: 'rgba(56,56,56,0.5)',
-        backdropFilter: 'blur(4px)',
-        border: 'none',
-        height: '100%',
-        overflowY: 'scroll',
-        color: theme.colors.gray[2],
+    <Resizable
+      defaultSize={{
+        width: 160,
+        height: 780,
       }}
+      maxWidth={300}
+      minWidth={110}
+      minHeight={780}
+      maxHeight={780}
     >
       <Box
+        p={10}
         sx={{
-          marginBottom: 300,
+          backgroundColor: 'rgba(56,56,56,0.5)',
+          backdropFilter: 'blur(4px)',
+          border: 'none',
+          height: '100%',
+          overflowY: 'scroll',
+          color: theme.colors.gray[2],
         }}
       >
-        <Text
+        <Box
           sx={{
-            fontSize: theme.fontSizes.md,
-            fontWeight: 600,
-            cursor: 'pointer',
-            marginBottom: 10,
-          }}
-          onClick={() =>
-            saveSubSideBarLabel({
-              type: 'note',
-              title: ALL_NOTES,
-            })
-          }
-        >
-          All Notes +
-        </Text>
-        {totalNotes.map(({ notebook }, i) => (
-          <Box
-            key={i}
-            sx={{
-              display: 'flex',
-              alignItems: 'center',
-              marginBottom: 3,
-            }}
-          >
-            <IconFolder size={20} style={{ flexShrink: 0, marginRight: 2 }} />
-            <Text
-              sx={{
-                cursor: 'pointer',
-                fontSize: theme.fontSizes.sm,
-                color: theme.colors.gray[3],
-              }}
-              onClick={() =>
-                saveSubSideBarLabel({
-                  type: 'note',
-                  title: notebook,
-                })
-              }
-            >
-              {notebook}
-            </Text>
-          </Box>
-        ))}
-      </Box>
-      <Box>
-        <Text
-          sx={{
-            fontSize: theme.fontSizes.md,
-            fontWeight: 600,
-            cursor: 'pointer',
-            marginBottom: 5,
+            marginBottom: 300,
           }}
         >
-          Tags +
-        </Text>
-        {tags.map((tag, i) => (
-          <Box
-            key={i}
+          <Text
             sx={{
-              width: '100%',
+              fontSize: theme.fontSizes.md,
+              fontWeight: 600,
               cursor: 'pointer',
-              display: 'flex',
-              alignItems: 'center',
-              marginBottom: 3,
+              marginBottom: 10,
+            }}
+            onClick={() =>
+              saveSubSideBarLabel({
+                type: 'note',
+                title: ALL_NOTES,
+              })
+            }
+          >
+            All Notes +
+          </Text>
+          {totalNotes.map(({ notebook }, i) => (
+            <Box
+              key={i}
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: 3,
+              }}
+            >
+              <IconFolder size={20} style={{ flexShrink: 0, marginRight: 2 }} />
+              <Text
+                sx={{
+                  cursor: 'pointer',
+                  fontSize: theme.fontSizes.sm,
+                  color: theme.colors.gray[3],
+                }}
+                onClick={() =>
+                  saveSubSideBarLabel({
+                    type: 'note',
+                    title: notebook,
+                  })
+                }
+              >
+                {notebook}
+              </Text>
+            </Box>
+          ))}
+        </Box>
+        <Box>
+          <Text
+            sx={{
+              fontSize: theme.fontSizes.md,
+              fontWeight: 600,
+              cursor: 'pointer',
+              marginBottom: 5,
             }}
           >
-            <IconTag size={20} style={{ flexShrink: 0, marginRight: 2 }} />
-            <Text
+            Tags +
+          </Text>
+          {tags.map((tag, i) => (
+            <Box
+              key={i}
               sx={{
-                fontSize: theme.fontSizes.sm,
+                width: '100%',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                marginBottom: 3,
               }}
-              onClick={() =>
-                saveSubSideBarLabel({ type: 'tag', title: tag.name })
-              }
             >
-              {tag.name}
-            </Text>
-          </Box>
-        ))}
+              <IconTag size={20} style={{ flexShrink: 0, marginRight: 2 }} />
+              <Text
+                sx={{
+                  fontSize: theme.fontSizes.sm,
+                }}
+                onClick={() =>
+                  saveSubSideBarLabel({ type: 'tag', title: tag.name })
+                }
+              >
+                {tag.name}
+              </Text>
+            </Box>
+          ))}
+        </Box>
       </Box>
-    </Box>
+    </Resizable>
   )
 }
