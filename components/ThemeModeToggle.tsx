@@ -29,7 +29,7 @@ const useStyles = createStyles((theme) => ({
 
   iconDark: {
     right: 4,
-    color: theme.colors.gray[6],
+    color: theme.colors.blue[5],
   },
 }))
 

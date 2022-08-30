@@ -22,7 +22,7 @@ export default function getTotalNotes(): INote[] {
       }))
     }
     return {
-      title: slugToTitle(slug),
+      title: frontData.title,
       slug,
       tags,
       content,

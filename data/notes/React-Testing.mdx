@@ -1,0 +1,92 @@
+---
+title: 'ReactJS Unit Testing'
+notebook: 'React js'
+tags: ['coding', 'react-js', 'jest', 'unit-testing']
+createdAt: '2022-08-29'
+---
+
+# [Learning React Ch.10] 리액트 테스트
+
+Unit Testing
+단위 테스팅을 통해 애플리케이션의 모든 부분 (또는 단위)이 의도대로 작동하는지 검증할 수 있음
+
+함수형 리액트는 테스트하기가 쉬움
+
+## 10.1 ESLint
+
+자바스크립트를 분석하는 과정을 힌팅 hinting 또는 린팅 linting 이라고 한다.
+ESLint는 최신 자바스크립트 문법을 지원하는 코드 린터다.
+ESLint는 플러그인을 추가할 수 있다.
+
+타입스크립트는 리액트 애플리케이션을 타입체킹하고 싶을 때 쓸 수 있는 또 다른 유명한 도구이다.
+타입스크립트는 자바스크립트의 하위집합이며 오픈 소스 언어이다. 따라서 타입스크립트 프로그램은 자바스크립트 프로그램이기도 하지만, 자바스크립트에 추가 기능을 제공한다.
+타입스크립트를 만든 목적은 큰 프로젝트에서 개발자가 좀 더 빨리 버그를 찾고 더 빠르게 개발 이터레이션이 가능하게 돕는 것이다.
+
+ReactJS + Typescript Cheet Sheet
+https://github.com/typescript-cheatsheets/react
+
+10.4 테스트 주도 개발
+테스트 주도 개발 (TDD)은 기술이 아니다 TDD는 단지 애플리케이션을 위한 테스트를 갖추는 것만 뜻하지 않는다.
+TDD는 모든 개발 과정을 테스트를 중심으로 진행해 나가는 습관이라고 할 수 있다.
+
+1. 테스트를 먼저 작성한다.
+2. 테스트를 실행하고 실패한다. (빨간색)
+3. 테스트를 통과하기 위해 필요한 최소한의 코드를 작성한다. (녹색)
+4. 코드와 테스트를 함께 리팩터링한다. (황금색
+
+   10.5 제스트 사용하기
+
+test 파일을 먼저 작성하고 코드를 짜고 테스트가 통과하는 걸 확인한다
+
+```jsx
+// function.js
+export function order(items) {
+  const total = items.reduce((price, item) => price + item.price, 0)
+  return {
+    orderItems: items,
+    total,
+  }
+}
+
+// function.test.js
+import { order } from './function'
+
+const menuItems = [
+  {
+    id: '1',
+    name: 'Tatted Up Turkey Burger',
+    price: 5,
+  },
+  {
+    id: '2',
+    name: 'Lobster Lollipops',
+    price: 5,
+  },
+  {
+    id: '3',
+    name: 'Motley Quey plull porkt',
+    price: 5,
+  },
+]
+
+const result = {
+  orderItems: menuItems,
+  total: 15,
+}
+
+test('Build an order object', () => {
+  expect(order(menuItems)).toEqual(result)
+})
+```
+
+describe()
+이 함수는 관련이 있는 여러 테스트를 하나로 묶어준다. 예를 들어, 비슷한 함수에 대한 몇 가지 테스트가 있다면, describe 문장으로 모든 테스트를 감쌀 수 있다.
+그러면 테스트 러너가 테스트를 묶은 블록을 만들어준다. 이에 다라 터미널에 표시되는 출력 화면이 좀 더 조직적이고 읽기 쉬워 진다.
+
+TDD 사이클 : 테스트를 먼저 작성하고, 그 테스트를 통과하기 위한 코드를 작성한다.
+
+### 10.6 리액트 컴포넌트 테스트하기
+
+리액트 컴포넌트를 Jest 를 이용해 테스트 방법을 공부했다
+이를 이용해 리액트 DOM 엘리먼트들의 렌더링 결과들을 검증할 수 있다.
+리액트를 초기화할 때 setupTest 파일을 이용해 jest expect extend 를 쉽게 사용할 수 있다

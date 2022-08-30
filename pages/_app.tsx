@@ -11,7 +11,7 @@ import {
   useMantineTheme,
 } from '@mantine/core'
 import { useState } from 'react'
-import GlobalStyles from '../components/GlobalStyles'
+import GlobalStyles from '../styles/GlobalStyles'
 import { SpotlightProvider } from '@mantine/spotlight'
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -43,13 +43,6 @@ function MyApp({ Component, pageProps }: AppProps) {
                   md: 1000,
                   lg: 1275,
                   xl: 1600,
-                },
-                other: {
-                  borderWidth: '1px',
-                  borderColor:
-                    theme.colorScheme === 'dark'
-                      ? 'rgba(255,255,255,0.2)'
-                      : 'rgba(0,0,0,0.2)',
                 },
               }}
             >
@@ -88,8 +81,5 @@ function MyApp({ Component, pageProps }: AppProps) {
 export default MyApp
 
 declare module '@mantine/core' {
-  export interface MantineThemeOther {
-    borderWidth: string
-    borderColor: string
-  }
+  export interface MantineThemeOther {}
 }

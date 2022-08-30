@@ -35,7 +35,11 @@
 - [x] Resizable SideBar Layout
 - [x] Dark mode / Light mode
 - [x] Footer Border Bug Fix
-- [ ] Clock Delete Seconds
+- [x] Clock Delete Seconds
+- [x] SubSideBar Title Bug Fix
+- [ ] Class Refactoring
+- [ ] CreatedAt Date Type
+- [ ] SideBar Icons
 - [ ] MDX Component
 - [ ] Search
   - [x] Spotlight Setup

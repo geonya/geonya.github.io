@@ -6,7 +6,6 @@ import {
   Grid,
   MediaQuery,
   ScrollArea,
-  Space,
   Text,
   useMantineTheme,
 } from '@mantine/core'
@@ -46,20 +45,27 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
             minHeight: 780,
             borderRadius: theme.radius.md,
             overflow: 'hidden',
-            borderWidth: theme.other.borderWidth,
-            borderColor: theme.other.borderColor,
+            border: `1px solid ${
+              theme.colorScheme === 'dark'
+                ? theme.colors.dark[4]
+                : theme.colors.dark[0]
+            }`,
+            backgroundColor: isDark
+              ? theme.colors.dark[5]
+              : theme.colors.gray[0],
           }}
         >
+          {/* header */}
           <Box
             sx={{
               height: 50,
               display: 'flex',
               alignItems: 'center',
-              borderBottomWidth: theme.other.borderWidth,
-              borderBottomColor: theme.other.borderColor,
-              backgroundColor: isDark
-                ? theme.colors.dark[6]
-                : theme.colors.dark[0],
+              borderBottom: `1px solid ${
+                theme.colorScheme === 'dark'
+                  ? theme.colors.dark[4]
+                  : theme.colors.dark[0]
+              }`,
             }}
           >
             <Grid
@@ -102,7 +108,12 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
                   alignItems: 'center',
                 }}
               >
-                <Box component={NextLink} href={'/'} sx={{ cursor: 'pointer' }}>
+                <Box
+                  component={NextLink}
+                  href={'/'}
+                  sx={{ cursor: 'pointer' }}
+                  onClick={() => toggleSideBar(false)}
+                >
                   <Text>Geony Devnotes</Text>
                 </Box>
               </Grid.Col>
@@ -142,10 +153,9 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
             scrollHideDelay={1000}
             sx={(theme) => ({
               height: 700,
+              whiteSpace: 'nowrap',
               position: 'relative',
-              backgroundColor: isDark
-                ? theme.colors.dark[6]
-                : theme.colors.dark[0],
+              overflow: 'hidden',
             })}
           >
             {sideBarShowing && (
@@ -160,26 +170,26 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
               >
                 <Resizable
                   defaultSize={{
-                    width: 150,
-                    height: '100%',
+                    width: 160,
+                    height: 780,
                   }}
                   maxWidth={300}
                   minWidth={110}
-                  minHeight={'100%'}
-                  maxHeight={'100%'}
+                  minHeight={780}
+                  maxHeight={780}
                 >
                   <SideBar />
                 </Resizable>
                 {subSideBarLabel && (
                   <Resizable
                     defaultSize={{
-                      width: 150,
-                      height: '100%',
+                      width: 160,
+                      height: 780,
                     }}
                     maxWidth={300}
                     minWidth={110}
-                    minHeight={'100%'}
-                    maxHeight={'100%'}
+                    minHeight={780}
+                    maxHeight={780}
                   >
                     <SubSideBar />
                   </Resizable>
@@ -197,15 +207,15 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
           <Box
             sx={{
               height: 30,
-              borderTopWidth: theme.other.borderWidth,
-              borderTopColor: theme.other.borderColor,
+              borderTop: `1px solid ${
+                theme.colorScheme === 'dark'
+                  ? theme.colors.dark[4]
+                  : theme.colors.dark[0]
+              }`,
               display: 'flex',
               justifyContent: 'center',
               alignItems: 'center',
               fontSize: theme.fontSizes.sm,
-              backgroundColor: isDark
-                ? theme.colors.dark[6]
-                : theme.colors.dark[0],
             }}
           >
             path: {(router.asPath as string) || ''}

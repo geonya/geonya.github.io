@@ -1,4 +1,5 @@
 import { Box, Navbar, ScrollArea, Text, useMantineTheme } from '@mantine/core'
+import { IconFolder, IconTag } from '@tabler/icons'
 import { ALL_NOTES } from '../constants/notebook.constants'
 import { useNoteContext } from '../context/NoteContext'
 import { useSidebarContext } from '../context/SidebarContext'
@@ -10,77 +11,102 @@ export default function SideBar() {
   const tags = extractTags(totalNotes)
   const theme = useMantineTheme()
   return (
-    <Navbar
+    <Box
       p={10}
       sx={{
         backgroundColor: 'rgba(56,56,56,0.5)',
         backdropFilter: 'blur(4px)',
         border: 'none',
+        height: '100%',
+        overflowY: 'scroll',
+        color: theme.colors.gray[2],
       }}
     >
-      <Navbar.Section
+      <Box
         sx={{
-          color: theme.colors.gray[2],
-          fontSize: theme.fontSizes.md,
-          fontWeight: 600,
-          cursor: 'pointer',
+          marginBottom: 300,
         }}
-        onClick={() =>
-          saveSubSideBarLabel({
-            type: 'note',
-            title: ALL_NOTES,
-          })
-        }
       >
-        All Notes +
-      </Navbar.Section>
-      <Navbar.Section grow component={ScrollArea} p={5}>
+        <Text
+          sx={{
+            fontSize: theme.fontSizes.md,
+            fontWeight: 600,
+            cursor: 'pointer',
+            marginBottom: 10,
+          }}
+          onClick={() =>
+            saveSubSideBarLabel({
+              type: 'note',
+              title: ALL_NOTES,
+            })
+          }
+        >
+          All Notes +
+        </Text>
         {totalNotes.map(({ notebook }, i) => (
-          <Text
+          <Box
             key={i}
             sx={{
-              cursor: 'pointer',
-              fontSize: theme.fontSizes.sm,
-              color: theme.colors.gray[3],
+              display: 'flex',
+              alignItems: 'center',
+              marginBottom: 3,
             }}
-            onClick={() =>
-              saveSubSideBarLabel({
-                type: 'note',
-                title: notebook,
-              })
-            }
           >
-            {notebook}
-          </Text>
+            <IconFolder size={20} style={{ flexShrink: 0, marginRight: 2 }} />
+            <Text
+              sx={{
+                cursor: 'pointer',
+                fontSize: theme.fontSizes.sm,
+                color: theme.colors.gray[3],
+              }}
+              onClick={() =>
+                saveSubSideBarLabel({
+                  type: 'note',
+                  title: notebook,
+                })
+              }
+            >
+              {notebook}
+            </Text>
+          </Box>
         ))}
-      </Navbar.Section>
-      <Navbar.Section
-        sx={{
-          color: theme.colors.gray[2],
-          fontSize: theme.fontSizes.md,
-          fontWeight: 600,
-          cursor: 'pointer',
-        }}
-      >
-        Tags +
-      </Navbar.Section>
-      <Navbar.Section grow component={ScrollArea} p={5}>
+      </Box>
+      <Box>
+        <Text
+          sx={{
+            fontSize: theme.fontSizes.md,
+            fontWeight: 600,
+            cursor: 'pointer',
+            marginBottom: 5,
+          }}
+        >
+          Tags +
+        </Text>
         {tags.map((tag, i) => (
-          <Text
+          <Box
             key={i}
             sx={{
+              width: '100%',
               cursor: 'pointer',
-              fontSize: theme.fontSizes.sm,
-              color: theme.colors.gray[3],
+              display: 'flex',
+              alignItems: 'center',
+              marginBottom: 3,
             }}
-            onClick={() =>
-              saveSubSideBarLabel({ type: 'tag', title: tag.name })
-            }
           >
-            {tag.name}
-          </Text>
+            <IconTag size={20} style={{ flexShrink: 0, marginRight: 2 }} />
+            <Text
+              sx={{
+                fontSize: theme.fontSizes.sm,
+              }}
+              onClick={() =>
+                saveSubSideBarLabel({ type: 'tag', title: tag.name })
+              }
+            >
+              {tag.name}
+            </Text>
+          </Box>
         ))}
-      </Navbar.Section>
-    </Navbar>
+      </Box>
+    </Box>
   )
 }

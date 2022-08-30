@@ -1,13 +1,6 @@
-import {
-  Box,
-  Center,
-  Navbar,
-  ScrollArea,
-  Text,
-  useMantineTheme,
-} from '@mantine/core'
+import { Box, Center, Text, useMantineTheme } from '@mantine/core'
 import { NextLink } from '@mantine/next'
-import { IconChevronsLeft } from '@tabler/icons'
+import { IconChevronsLeft, IconFileText } from '@tabler/icons'
 import { useSidebarContext } from '../context/SidebarContext'
 import useGetNotes from '../hooks/useGetNotes'
 
@@ -18,54 +11,53 @@ export default function SubSideBar() {
   const notes = useGetNotes(subSideBarLabel)
   const onDismiss = () => saveSubSideBarLabel(null)
   return (
-    <Navbar
+    <Box
       p={10}
       sx={{
+        color: theme.colors.gray[2],
         backgroundColor: 'rgba(23,23,23,0.6)',
         backdropFilter: 'blur(4px)',
         border: 'none',
+        height: '100%',
+        overflowY: 'scroll',
       }}
     >
-      <Navbar.Section
+      <Box
         sx={{
-          color: theme.colors.gray[2],
-          fontSize: theme.fontSizes.md,
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
           fontWeight: 600,
+          marginBottom: 10,
         }}
       >
-        <Box
-          sx={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}
+        <Text>{subSideBarLabel?.title}</Text>
+        <Center
+          sx={{ cursor: 'pointer', width: 23, height: 23, marginRight: 5 }}
+          onClick={() => onDismiss()}
         >
-          <Text>{subSideBarLabel?.title}</Text>
-          <Center
-            sx={{ cursor: 'pointer', width: 23, height: 23, marginRight: 5 }}
-            onClick={() => onDismiss()}
-          >
-            <IconChevronsLeft />
-          </Center>
+          <IconChevronsLeft />
+        </Center>
+      </Box>
+      {notes.map((note, i) => (
+        <Box
+          key={i}
+          component={NextLink}
+          href={`/notes/${note.slug}`}
+          sx={{
+            width: '100%',
+            cursor: 'pointer',
+            fontSize: theme.fontSizes.sm,
+            display: 'flex',
+            alignItems: 'center',
+            marginBottom: 7,
+          }}
+          onClick={() => toggleSideBar()}
+        >
+          <IconFileText size={18} style={{ flexShrink: 0, marginRight: 2 }} />
+          <Text sx={{ fontSize: theme.fontSizes.xs }}>{note.title}</Text>
         </Box>
-      </Navbar.Section>
-      <Navbar.Section grow component={ScrollArea} p={5}>
-        {notes.map((note, i) => (
-          <Box
-            key={i}
-            component={NextLink}
-            href={`/notes/${note.slug}`}
-            sx={{
-              cursor: 'pointer',
-              fontSize: theme.fontSizes.sm,
-              color: theme.colors.gray[3],
-            }}
-            onClick={() => toggleSideBar()}
-          >
-            {note.title}
-          </Box>
-        ))}
-      </Navbar.Section>
-    </Navbar>
+      ))}
+    </Box>
   )
 }
