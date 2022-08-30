@@ -30,7 +30,14 @@ function MyApp({ Component, pageProps }: AppProps) {
             colorScheme={colorScheme}
             toggleColorScheme={toggleColorScheme}
           >
-            <MantineProvider withGlobalStyles withNormalizeCSS theme={myTheme}>
+            <MantineProvider
+              withGlobalStyles
+              withNormalizeCSS
+              theme={{
+                colorScheme,
+                ...myTheme,
+              }}
+            >
               <SpotlightProvider
                 nothingFoundMessage='Nothing found...'
                 shortcut={['mod + P', 'mod + K', '/']}

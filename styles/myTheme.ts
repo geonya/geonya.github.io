@@ -1,7 +1,6 @@
 import { MantineThemeOverride } from '@mantine/core'
 
 const myTheme: MantineThemeOverride = {
-  colorScheme: 'dark',
   breakpoints: {
     xs: 600,
     sm: 800,
