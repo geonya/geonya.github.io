@@ -108,14 +108,14 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
                   alignItems: 'center',
                 }}
               >
-                <Box
+                <Text
                   component={NextLink}
                   href={'/'}
                   sx={{ cursor: 'pointer' }}
                   onClick={() => toggleSideBar(false)}
                 >
-                  <Text>Geony Devnotes</Text>
-                </Box>
+                  Geony Devnotes
+                </Text>
               </Grid.Col>
               <Grid.Col
                 span={3}

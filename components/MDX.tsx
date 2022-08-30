@@ -1,25 +1,58 @@
-import {
-  Box,
-  Container,
-  Group,
-  Text,
-  Title,
-  TypographyStylesProvider,
-  useMantineTheme,
-} from '@mantine/core'
-import { Prism } from '@mantine/prism'
+import { Box, Group, List, Text, Title, useMantineTheme } from '@mantine/core'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { useSidebarContext } from '../context/SidebarContext'
 import useIsDark from '../hooks/useIsDark'
-import { IMetaData, ITag } from '../types/types'
+import { IMetaData, ITag, PropsType } from '../types/types'
+import BlockQuote from './template/Blockquote'
+import Code from './template/Code'
 
 interface MDXProps {
   source: MDXRemoteSerializeResult<Record<string, unknown>>
   metaData: IMetaData
-  content: string
 }
-
-export default function MDX({ source, metaData, content }: MDXProps) {
+const components = {
+  code: Code,
+  h1: ({ children }: PropsType) => (
+    <Title order={1} mb={20}>
+      {children}
+    </Title>
+  ),
+  h2: ({ children }: PropsType) => (
+    <Title order={2} mb={20}>
+      {children}
+    </Title>
+  ),
+  h3: ({ children }: PropsType) => (
+    <Title order={3} mb={20}>
+      {children}
+    </Title>
+  ),
+  h4: ({ children }: PropsType) => (
+    <Title order={4} mb={20}>
+      {children}
+    </Title>
+  ),
+  div: ({ children }: PropsType) => <Box mb={20}>{children}</Box>,
+  p: ({ children }: PropsType) => <Text mb={20}>{children}</Text>,
+  ul: ({ children }: PropsType) => (
+    <List listStyleType='disc' mb={20}>
+      {children}
+    </List>
+  ),
+  ol: ({ children }: PropsType) => (
+    <List listStyleType='number' mb={20}>
+      {children}
+    </List>
+  ),
+  li: ({ children }: PropsType) => <List.Item mb={5}>{children}</List.Item>,
+  strong: ({ children }: PropsType) => (
+    <Text weight={600} mb={20}>
+      {children}
+    </Text>
+  ),
+  blockquote: BlockQuote,
+}
+export default function MDX({ source, metaData }: MDXProps) {
   const isDark = useIsDark()
   const { toggleSideBar, saveSubSideBarLabel } = useSidebarContext()
   const onTagClick = (tagName: string) => {
@@ -27,6 +60,7 @@ export default function MDX({ source, metaData, content }: MDXProps) {
     saveSubSideBarLabel({ type: 'tag', title: tagName })
   }
   const theme = useMantineTheme()
+
   return (
     <Group
       p={20}
@@ -82,16 +116,14 @@ export default function MDX({ source, metaData, content }: MDXProps) {
                 },
               }}
             >
-              <span>{tagName}</span>
+              <Text>{tagName}</Text>
             </Box>
           ))}
         </Group>
       </Group>
-      <TypographyStylesProvider
-        sx={{ width: '100%', fontFamily: 'sans-serif' }}
-      >
-        <div dangerouslySetInnerHTML={{ __html: content }} />
-      </TypographyStylesProvider>
+      <Box sx={{ width: '100%' }}>
+        <MDXRemote {...source} components={components} lazy />
+      </Box>
     </Group>
   )
 }

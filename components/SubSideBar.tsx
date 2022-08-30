@@ -40,7 +40,7 @@ export default function SubSideBar() {
         </Center>
       </Box>
       {notes.map((note, i) => (
-        <Box
+        <Text
           key={i}
           component={NextLink}
           href={`/notes/${note.slug}`}
@@ -56,7 +56,7 @@ export default function SubSideBar() {
         >
           <IconFileText size={18} style={{ flexShrink: 0, marginRight: 2 }} />
           <Text sx={{ fontSize: theme.fontSizes.xs }}>{note.title}</Text>
-        </Box>
+        </Text>
       ))}
     </Box>
   )

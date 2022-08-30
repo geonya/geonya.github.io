@@ -18,3 +18,5 @@ export interface IMetaData {
   notebook: string
   createdAt: string
 }
+
+export type PropsType = { children?: React.ReactNode; className?: string }

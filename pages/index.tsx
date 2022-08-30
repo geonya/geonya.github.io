@@ -9,37 +9,30 @@ import { IMetaData, INote } from '../types/types'
 import { NOTES_DIR } from '../constants/notebook.constants'
 import { MDXRemoteSerializeResult } from 'next-mdx-remote'
 import MDX from '../components/MDX'
-import { compile } from '@mdx-js/mdx'
-import remarkGfm from 'remark-gfm'
 
 interface HomeProps {
   totalNotes: INote[]
   metaData: IMetaData
   source: MDXRemoteSerializeResult<Record<string, unknown>>
-  content: string
 }
 export const getStaticProps: GetStaticProps = async () => {
   const notes = fs.readdirSync(path.join(process.cwd(), NOTES_DIR))
   const markdown = fs.readFileSync(
     path.join(process.cwd(), NOTES_DIR, notes[0]),
   )
-  const { data: metaData, content: rawContent } = matter(markdown)
-  const content = String(
-    await compile(markdown, { remarkPlugins: [remarkGfm] }),
-  )
-  const source = await serialize(rawContent)
+  const { data: metaData, content } = matter(markdown)
+  const source = await serialize(content)
   return {
     props: {
       totalNotes: getTotalNotes(),
       source,
-      content,
       metaData,
     },
   }
 }
-const Home = ({ totalNotes, source, metaData, content }: HomeProps) => {
+const Home = ({ totalNotes, source, metaData }: HomeProps) => {
   useSaveTotalNotes(totalNotes)
-  return <MDX source={source} metaData={metaData} content={content} />
+  return <MDX source={source} metaData={metaData} />
 }
 
 export default Home
