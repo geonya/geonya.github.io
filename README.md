@@ -37,15 +37,20 @@
 - [x] Footer Border Bug Fix
 - [x] Clock Delete Seconds
 - [x] SubSideBar Title Bug Fix
-- [ ] Class Refactoring
-- [ ] CreatedAt Date Type
 - [x] SideBar Icons
 - [x] MDX Component
 - [x] Search
   - [x] Spotlight Setup
   - [x] Search Button Design
 - [x] Responsive Design Fix
-- [ ] Header : SNS Icons
-- [ ] SEO Setup
-- [ ] Comment (github)
+- [x] Header : SNS Icons
+- [x] Comment (giscus)
+- [x] SEO Setup
+- [x] Sitemap
+- [x] Google Search Console
 - [x] Deploy in Github Page 🚀
+
+- [ ] Styles Classes Refactoring
+- [ ] CreatedAt Date Type
+- [ ] 404 Page
+- [ ] Mobile View Optimization

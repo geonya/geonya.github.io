@@ -37,7 +37,7 @@ export default function Header() {
         },
         backgroundColor: isDark
           ? theme.fn.rgba(theme.colors.dark[5], 1)
-          : theme.colors.gray[0],
+          : theme.colors.gray[1],
       }}
       px={5}
     >

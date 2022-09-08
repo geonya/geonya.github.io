@@ -24,7 +24,7 @@ export default function SubSideBar({ height }: { height: number }) {
         p={10}
         sx={{
           color: theme.colors.gray[2],
-          backgroundColor: 'rgba(23,23,23,0.6)',
+          backgroundColor: theme.fn.rgba(theme.colors.dark[6], 0.7),
           backdropFilter: 'blur(4px)',
           borderRadius: theme.radius.sm,
           border: 'none',

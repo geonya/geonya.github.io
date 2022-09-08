@@ -24,7 +24,7 @@ export default function Footer() {
         },
         backgroundColor: isDark
           ? theme.fn.rgba(theme.colors.dark[5], 1)
-          : theme.colors.gray[0],
+          : theme.colors.gray[1],
       }}
     >
       path: {(router.asPath as string) || ''}

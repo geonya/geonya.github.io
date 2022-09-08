@@ -78,7 +78,6 @@ export default function SideBar({ height }: { height: number }) {
                   sx={{
                     cursor: 'pointer',
                     fontSize: theme.fontSizes.sm,
-                    color: theme.colors.gray[3],
                   }}
                   onClick={() =>
                     saveSubSideBarLabel({
@@ -136,9 +135,6 @@ export default function SideBar({ height }: { height: number }) {
             bottom: 0,
             left: 0,
             height: 40,
-            backgroundColor: theme.colors.dark[6],
-            borderTopRightRadius: theme.radius.md,
-            borderTopLeftRadius: theme.radius.md,
           }}
           position='center'
         >

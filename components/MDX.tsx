@@ -1,11 +1,4 @@
-import {
-  Box,
-  Container,
-  Group,
-  Text,
-  Title,
-  useMantineTheme,
-} from '@mantine/core'
+import { Box, Group, Text, Title, useMantineTheme } from '@mantine/core'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import { useSidebarContext } from '../context/SidebarContext'
 import useIsDark from '../hooks/useIsDark'
@@ -60,7 +53,9 @@ export default function MDX({ source, frontData }: MDXProps) {
           justifyContent: 'center',
           alignItems: 'center',
           height: 150,
-          backgroundColor: isDark ? theme.colors.dark[4] : theme.colors.gray[4],
+          backgroundColor: isDark
+            ? theme.fn.rgba(theme.colors.dark[6], 0.7)
+            : theme.colors.gray[3],
         }}
       >
         <Title
