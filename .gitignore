@@ -42,7 +42,7 @@ next-env.d.ts
 
 # Sitemap file
 sitemap.xml
-sitemap-0.xml
+sitemap/
 
 
 # Robots.txt
