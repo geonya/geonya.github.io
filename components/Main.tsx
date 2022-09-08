@@ -1,6 +1,5 @@
 import { ScrollArea, useMantineTheme } from '@mantine/core'
 import React from 'react'
-import { MAIN_HEIGHT } from '../constants/styles.constants'
 
 export default function Main({ children }: { children: React.ReactNode }) {
   const theme = useMantineTheme()
@@ -14,7 +13,6 @@ export default function Main({ children }: { children: React.ReactNode }) {
             ? theme.fn.rgba(theme.colors.dark[8], 0.5)
             : theme.fn.rgba(theme.colors.gray[0], 1),
         overflowX: 'hidden',
-        height: MAIN_HEIGHT,
         [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
           width: '100vw',
           height: '100vh',

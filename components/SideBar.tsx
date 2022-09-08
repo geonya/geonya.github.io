@@ -33,7 +33,6 @@ export default function SideBar({ height }: { height: number }) {
           border: 'none',
           overflowY: 'scroll',
           height: height,
-          color: theme.colors.gray[2],
           [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
             height: height - 80,
           },
