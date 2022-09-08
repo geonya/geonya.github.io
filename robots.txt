@@ -9,3 +9,6 @@ Allow: /
 
 # Host
 Host: https://geonya.github.io
+
+# Sitemap
+Sitemap : https://geonya.github.io/sitemap.xml
