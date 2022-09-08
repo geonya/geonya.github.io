@@ -10,9 +10,6 @@ export default function Footer() {
     <Box
       sx={{
         height: 30,
-        borderTop: `1px solid ${
-          isDark ? theme.colors.dark[4] : theme.colors.dark[0]
-        }`,
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -22,9 +19,12 @@ export default function Footer() {
           position: 'fixed',
           bottom: 0,
           left: 0,
-          backgroundColor: isDark ? theme.colors.dark[5] : theme.colors.gray[0],
+
           zIndex: 888,
         },
+        backgroundColor: isDark
+          ? theme.fn.rgba(theme.colors.dark[5], 1)
+          : theme.colors.gray[0],
       }}
     >
       path: {(router.asPath as string) || ''}

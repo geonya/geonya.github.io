@@ -27,7 +27,7 @@ export default function SideBar({ height }: { height: number }) {
         p={10}
         sx={{
           position: 'relative',
-          backgroundColor: 'rgba(56,56,56,0.6)',
+          backgroundColor: theme.fn.rgba(theme.colors.dark[5], 0.6),
           backdropFilter: 'blur(4px)',
           borderRadius: theme.radius.sm,
           border: 'none',

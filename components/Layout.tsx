@@ -17,7 +17,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
   const { ref, height } = useElementSize()
   return (
     <BackgroundImage src={'/images/base-background-img.jpeg'}>
-      <Center sx={{ width: '100vw', height: '100vh' }}>
+      <Center>
         <Box
           sx={{
             [`@media (min-width: ${theme.breakpoints.xl}px)`]: {
@@ -40,7 +40,7 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
               isDark ? theme.colors.dark[4] : theme.colors.dark[0]
             }`,
             backgroundColor: isDark
-              ? theme.fn.rgba(theme.colors.dark[5], 0.89)
+              ? theme.fn.rgba(theme.colors.dark[5], 0.6)
               : theme.colors.gray[0],
             position: 'relative',
           }}
