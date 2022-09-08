@@ -14,6 +14,9 @@ export default function GlobalStyles() {
               ? theme.colors.gray[4]
               : theme.colors.dark[5],
         },
+        a: {
+          all: 'unset',
+        },
       })}
     />
   )

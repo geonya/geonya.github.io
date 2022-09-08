@@ -16,13 +16,9 @@ import ThemeModeToggle from './ThemeModeToggle'
 import metaData from '../data/metaData'
 import useIsDark from '../hooks/useIsDark'
 import { SpotlightProvider } from '@mantine/spotlight'
-import {
-  IconBrandGithub,
-  IconBrandInstagram,
-  IconBrandLinkedin,
-  IconUser,
-} from '@tabler/icons'
-import Link from 'next/link'
+import MyIconAboutMe from './icons/MyIconAboutMe'
+import MyIconGithub from './icons/MyIconGithub'
+import MyIconInstagram from './icons/MyIconInstagram'
 
 export default function Header() {
   const { toggleSideBar, sideBarShowing } = useSidebarContext()
@@ -86,13 +82,10 @@ export default function Header() {
               {metaData.title}
             </Text>
             <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
-              <Group position='center'>
-                <Link href={'/notes/about-me'}>
-                  <IconUser size={20} style={{ cursor: 'pointer' }} />
-                </Link>
-                <IconBrandGithub size={20} />
-                <IconBrandInstagram size={20} />
-                <IconBrandLinkedin size={20} />
+              <Group>
+                <MyIconAboutMe />
+                <MyIconGithub />
+                <MyIconInstagram />
               </Group>
             </MediaQuery>
           </Group>

@@ -1,27 +1,13 @@
-import {
-  Box,
-  Button,
-  Group,
-  ScrollArea,
-  Text,
-  useMantineTheme,
-} from '@mantine/core'
-import { NextLink } from '@mantine/next'
-import {
-  IconBrandFigma,
-  IconBrandGithub,
-  IconBrandInstagram,
-  IconBrandLinkedin,
-  IconFolder,
-  IconTag,
-  IconUser,
-} from '@tabler/icons'
-import Link from 'next/link'
+import { Box, Group, ScrollArea, Text, useMantineTheme } from '@mantine/core'
+import { IconFolder, IconTag } from '@tabler/icons'
 import { ALL_NOTES } from '../constants/notebook.constants'
 import { useNoteContext } from '../context/NoteContext'
 import { useSidebarContext } from '../context/SidebarContext'
 import extractTags from '../lib/extractTags'
 import { Resizable } from '../lib/layout-resizable'
+import MyIconAboutMe from './icons/MyIconAboutMe'
+import MyIconGithub from './icons/MyIconGithub'
+import MyIconInstagram from './icons/MyIconInstagram'
 
 export default function SideBar({ height }: { height: number }) {
   const { totalNotes } = useNoteContext()
@@ -156,12 +142,9 @@ export default function SideBar({ height }: { height: number }) {
           }}
           position='center'
         >
-          <Link href={'/notes/about-me'}>
-            <IconUser size={20} style={{ cursor: 'pointer' }} />
-          </Link>
-          <IconBrandGithub size={20} />
-          <IconBrandInstagram size={20} />
-          <IconBrandLinkedin size={20} />
+          <MyIconAboutMe />
+          <MyIconGithub />
+          <MyIconInstagram />
         </Group>
       </ScrollArea>
     </Resizable>
