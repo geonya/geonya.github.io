@@ -5,7 +5,12 @@ export default function GlobalStyles() {
     <Global
       styles={(theme) => ({
         '*, *::before, *::after': { boxSizing: 'border-box' },
+        html: {
+          overflowX: 'hidden',
+        },
         body: {
+          overflowX: 'hidden',
+          position: 'relative',
           ...theme.fn.fontStyles(),
           fontSize: theme.fontSizes.md,
           lineHeight: theme.lineHeight,
