@@ -25,9 +25,7 @@ export default function MDX({ source, frontData }: MDXProps) {
   const theme = useMantineTheme()
 
   const { classes, cx } = useStyles()
-
   const { width } = useViewportSize()
-
   return (
     <Box
       px={20}
@@ -38,7 +36,7 @@ export default function MDX({ source, frontData }: MDXProps) {
         width: theme.breakpoints.xs,
         whiteSpace: 'normal',
         [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
-          width,
+          width: width || 380,
           paddingTop: 80,
         },
       }}

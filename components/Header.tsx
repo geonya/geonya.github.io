@@ -19,6 +19,7 @@ import { SpotlightProvider } from '@mantine/spotlight'
 import MyIconAboutMe from './icons/MyIconAboutMe'
 import MyIconGithub from './icons/MyIconGithub'
 import MyIconInstagram from './icons/MyIconInstagram'
+import { wrap } from 'module'
 
 export default function Header() {
   const { toggleSideBar, sideBarShowing } = useSidebarContext()
@@ -93,6 +94,15 @@ export default function Header() {
           <SpotlightProvider
             nothingFoundMessage='Nothing found...'
             shortcut={['mod + P', 'mod + K', '/']}
+            highlightQuery
+            styles={{
+              spotlight: {
+                [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
+                  width: '80%',
+                },
+                flexWrap: 'wrap',
+              },
+            }}
             actions={[]}
             filter={(query, actions) =>
               actions.filter(
