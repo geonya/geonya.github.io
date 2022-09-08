@@ -3,6 +3,7 @@ import {
   Burger,
   Center,
   Grid,
+  Group,
   MediaQuery,
   Text,
   useMantineTheme,
@@ -14,6 +15,14 @@ import Search from './Search'
 import ThemeModeToggle from './ThemeModeToggle'
 import metaData from '../data/metaData'
 import useIsDark from '../hooks/useIsDark'
+import { SpotlightProvider } from '@mantine/spotlight'
+import {
+  IconBrandGithub,
+  IconBrandInstagram,
+  IconBrandLinkedin,
+  IconUser,
+} from '@tabler/icons'
+import Link from 'next/link'
 
 export default function Header() {
   const { toggleSideBar, sideBarShowing } = useSidebarContext()
@@ -24,9 +33,7 @@ export default function Header() {
       sx={{
         height: 50,
         borderBottom: `1px solid ${
-          theme.colorScheme === 'dark'
-            ? theme.colors.dark[4]
-            : theme.colors.dark[0]
+          isDark ? theme.colors.dark[4] : theme.colors.dark[0]
         }`,
         [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
           width: '100%',
@@ -61,25 +68,53 @@ export default function Header() {
           </Box>
         </Grid.Col>
         <Grid.Col span={5}>
-          <Text
-            component={NextLink}
-            href={'/'}
-            sx={{
-              cursor: 'pointer',
-              fontWeight: 600,
-              whiteSpace: 'nowrap',
-              fontSize: theme.fontSizes.md,
-              [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
-                fontSize: theme.fontSizes.sm,
-              },
-            }}
-            onClick={() => toggleSideBar(false)}
-          >
-            {metaData.title}
-          </Text>
+          <Group>
+            <Text
+              component={NextLink}
+              href={'/'}
+              sx={{
+                cursor: 'pointer',
+                fontWeight: 600,
+                whiteSpace: 'nowrap',
+                fontSize: theme.fontSizes.md,
+                [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+                  fontSize: theme.fontSizes.sm,
+                },
+              }}
+              onClick={() => toggleSideBar(false)}
+            >
+              {metaData.title}
+            </Text>
+            <MediaQuery smallerThan='sm' styles={{ display: 'none' }}>
+              <Group position='center'>
+                <Link href={'/notes/about-me'}>
+                  <IconUser size={20} style={{ cursor: 'pointer' }} />
+                </Link>
+                <IconBrandGithub size={20} />
+                <IconBrandInstagram size={20} />
+                <IconBrandLinkedin size={20} />
+              </Group>
+            </MediaQuery>
+          </Group>
         </Grid.Col>
         <Grid.Col span={3}>
-          <Search />
+          <SpotlightProvider
+            nothingFoundMessage='Nothing found...'
+            shortcut={['mod + P', 'mod + K', '/']}
+            actions={[]}
+            filter={(query, actions) =>
+              actions.filter(
+                (action) =>
+                  action.title.toLowerCase().includes(query.toLowerCase()) ||
+                  action.description
+                    ?.toLowerCase()
+                    .includes(query.toLowerCase()) ||
+                  action.content?.toLowerCase().includes(query.toLowerCase()),
+              )
+            }
+          >
+            <Search />
+          </SpotlightProvider>
         </Grid.Col>
         <Grid.Col span={1}>
           <ThemeModeToggle />

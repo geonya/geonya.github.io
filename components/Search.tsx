@@ -2,6 +2,7 @@ import { Group, MediaQuery, Text, useMantineTheme } from '@mantine/core'
 import { useSpotlight } from '@mantine/spotlight'
 import { IconSearch } from '@tabler/icons'
 import { useNoteContext } from '../context/NoteContext'
+import useIsDark from '../hooks/useIsDark'
 import useSpotlightActions from '../hooks/useSpotlightActions'
 
 export default function Search() {
@@ -9,6 +10,7 @@ export default function Search() {
   const spotlight = useSpotlight()
   const actions = useSpotlightActions(totalNotes)
   const theme = useMantineTheme()
+  const isDark = useIsDark()
   return (
     <Group
       py={5}
@@ -34,16 +36,11 @@ export default function Search() {
         flexWrap: 'nowrap',
         alignItems: 'center',
         justifyContent: 'space-around',
-        backgroundColor:
-          theme.colorScheme === 'dark'
-            ? theme.colors.dark[4]
-            : theme.colors.gray[1],
+        backgroundColor: isDark ? theme.colors.dark[4] : theme.colors.gray[1],
         borderRadius: theme.radius.md,
         cursor: 'pointer',
         border: `1px solid ${
-          theme.colorScheme === 'dark'
-            ? theme.colors.dark[3]
-            : theme.colors.dark[0]
+          isDark ? theme.colors.dark[3] : theme.colors.dark[0]
         }`,
         '&:hover': {
           opacity: 0.5,

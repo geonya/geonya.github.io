@@ -27,10 +27,10 @@ export default function getTotalNotes(): INote[] {
       tags,
       content,
       notebook: frontData.notebook,
-      createdAt: new Date(frontData.createAt),
+      createdAt: new Date(frontData.createdAt),
     }
   })
   return notes
-    .sort((a, b) => (a.createdAt < b.createdAt ? -1 : 1))
+    .sort((a, b) => (a.createdAt < b.createdAt ? 1 : -1))
     .map((note) => ({ ...note, createdAt: note.createdAt.toString() }))
 }

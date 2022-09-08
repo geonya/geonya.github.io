@@ -10,7 +10,6 @@ import {
 } from '@mantine/core'
 import { useState } from 'react'
 import GlobalStyles from '../styles/GlobalStyles'
-import { SpotlightProvider } from '@mantine/spotlight'
 import myTheme from '../styles/myTheme'
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -38,30 +37,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                 ...myTheme,
               }}
             >
-              <SpotlightProvider
-                nothingFoundMessage='Nothing found...'
-                shortcut={['mod + P', 'mod + K', '/']}
-                actions={[]}
-                filter={(query, actions) =>
-                  actions.filter(
-                    (action) =>
-                      action.title
-                        .toLowerCase()
-                        .includes(query.toLowerCase()) ||
-                      action.description
-                        ?.toLowerCase()
-                        .includes(query.toLowerCase()) ||
-                      action.content
-                        ?.toLowerCase()
-                        .includes(query.toLowerCase()),
-                  )
-                }
-              >
-                <GlobalStyles />
-                <Layout>
-                  <Component {...pageProps} />
-                </Layout>
-              </SpotlightProvider>
+              <GlobalStyles />
+              <Layout>
+                <Component {...pageProps} />
+              </Layout>
             </MantineProvider>
           </ColorSchemeProvider>
         </SidebarContextProiver>

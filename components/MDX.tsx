@@ -13,6 +13,7 @@ import { IFrontData } from '../types/types'
 import Code from './template/Code'
 import useStyles from '../components/template/Components.styles'
 import { useViewportSize } from '@mantine/hooks'
+import Giscus from './giscus/Giscus'
 
 interface MDXProps {
   source: MDXRemoteSerializeResult<Record<string, unknown>>
@@ -37,13 +38,15 @@ export default function MDX({ source, frontData }: MDXProps) {
   return (
     <Box
       px={20}
-      py={20}
+      py={60}
       mx='auto'
       sx={{
+        height: '100%',
         width: theme.breakpoints.xs,
         whiteSpace: 'normal',
         [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
           width,
+          paddingTop: 80,
         },
       }}
     >
@@ -117,6 +120,20 @@ export default function MDX({ source, frontData }: MDXProps) {
       </Group>
       <Box className={cx(classes.root)}>
         <MDXRemote {...source} components={components} lazy />
+        <Giscus
+          repo='geonya/geonya.github.io'
+          repoId='R_kgDOH3yhMQ'
+          category='General'
+          categoryId='DIC_kwDOH3yhMc4CRT6o'
+          mapping='pathname'
+          strict='0'
+          reactionsEnabled='1'
+          emitMetadata='0'
+          inputPosition='top'
+          theme={theme.colorScheme}
+          lang='en'
+          loading='eager'
+        />
       </Box>
     </Box>
   )

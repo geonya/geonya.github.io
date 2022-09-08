@@ -1,5 +1,22 @@
-import { Box, ScrollArea, Text, useMantineTheme } from '@mantine/core'
-import { IconFolder, IconTag } from '@tabler/icons'
+import {
+  Box,
+  Button,
+  Group,
+  ScrollArea,
+  Text,
+  useMantineTheme,
+} from '@mantine/core'
+import { NextLink } from '@mantine/next'
+import {
+  IconBrandFigma,
+  IconBrandGithub,
+  IconBrandInstagram,
+  IconBrandLinkedin,
+  IconFolder,
+  IconTag,
+  IconUser,
+} from '@tabler/icons'
+import Link from 'next/link'
 import { ALL_NOTES } from '../constants/notebook.constants'
 import { useNoteContext } from '../context/NoteContext'
 import { useSidebarContext } from '../context/SidebarContext'
@@ -23,7 +40,8 @@ export default function SideBar({ height }: { height: number }) {
       <ScrollArea
         p={10}
         sx={{
-          backgroundColor: 'rgba(56,56,56,0.5)',
+          position: 'relative',
+          backgroundColor: 'rgba(56,56,56,0.6)',
           backdropFilter: 'blur(4px)',
           borderRadius: theme.radius.sm,
           border: 'none',
@@ -56,33 +74,38 @@ export default function SideBar({ height }: { height: number }) {
           >
             All Notes +
           </Text>
-          {totalNotes.map(({ notebook }, i) => (
-            <Box
-              key={i}
-              sx={{
-                display: 'flex',
-                alignItems: 'center',
-                marginBottom: 3,
-              }}
-            >
-              <IconFolder size={20} style={{ flexShrink: 0, marginRight: 2 }} />
-              <Text
+          {totalNotes.map(({ notebook }, i) =>
+            notebook === '' ? null : (
+              <Box
+                key={i}
                 sx={{
-                  cursor: 'pointer',
-                  fontSize: theme.fontSizes.sm,
-                  color: theme.colors.gray[3],
+                  display: 'flex',
+                  alignItems: 'center',
+                  marginBottom: 3,
                 }}
-                onClick={() =>
-                  saveSubSideBarLabel({
-                    type: 'note',
-                    title: notebook,
-                  })
-                }
               >
-                {notebook}
-              </Text>
-            </Box>
-          ))}
+                <IconFolder
+                  size={20}
+                  style={{ flexShrink: 0, marginRight: 2 }}
+                />
+                <Text
+                  sx={{
+                    cursor: 'pointer',
+                    fontSize: theme.fontSizes.sm,
+                    color: theme.colors.gray[3],
+                  }}
+                  onClick={() =>
+                    saveSubSideBarLabel({
+                      type: 'note',
+                      title: notebook,
+                    })
+                  }
+                >
+                  {notebook}
+                </Text>
+              </Box>
+            ),
+          )}
         </Box>
         <Box>
           <Text
@@ -120,6 +143,26 @@ export default function SideBar({ height }: { height: number }) {
             </Box>
           ))}
         </Box>
+        <Group
+          sx={{
+            width: '100%',
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            height: 40,
+            backgroundColor: theme.colors.dark[6],
+            borderTopRightRadius: theme.radius.md,
+            borderTopLeftRadius: theme.radius.md,
+          }}
+          position='center'
+        >
+          <Link href={'/notes/about-me'}>
+            <IconUser size={20} style={{ cursor: 'pointer' }} />
+          </Link>
+          <IconBrandGithub size={20} />
+          <IconBrandInstagram size={20} />
+          <IconBrandLinkedin size={20} />
+        </Group>
       </ScrollArea>
     </Resizable>
   )

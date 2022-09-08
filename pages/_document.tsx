@@ -1,8 +1,4 @@
-import {
-  createGetInitialProps,
-  createStylesServer,
-  ServerStyles,
-} from '@mantine/next'
+import { createStylesServer, ServerStyles } from '@mantine/next'
 import Document, {
   Html,
   Head,

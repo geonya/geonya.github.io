@@ -83,7 +83,7 @@ export default createStyles((theme) => {
       },
 
       '& pre': {
-        padding: theme.spacing.xs,
+        padding: 0,
         lineHeight: theme.lineHeight,
         margin: 0,
         marginTop: theme.spacing.md,

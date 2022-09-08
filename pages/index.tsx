@@ -1,19 +1,16 @@
-import fs from 'fs'
-import path from 'path'
 import MDX from '../components/MDX'
 import type { GetStaticProps } from 'next'
 import useSaveTotalNotes from '../hooks/useSaveTotalNotes'
 import getTotalNotes from '../lib/getTotalNotes'
 import { PageProps } from '../types/types'
-import { NOTES_DIR } from '../constants/notebook.constants'
 import makeMDXdata from '../lib/makeMDXdata'
 
 export const getStaticProps: GetStaticProps = async () => {
-  const notes = fs.readdirSync(path.join(process.cwd(), NOTES_DIR))
-  const mdxData = await makeMDXdata(notes[0])
+  const totalNotes = getTotalNotes()
+  const mdxData = await makeMDXdata(totalNotes[0].slug + '.mdx')
   return {
     props: {
-      totalNotes: getTotalNotes(),
+      totalNotes,
       ...mdxData,
     },
   }

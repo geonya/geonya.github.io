@@ -45,6 +45,7 @@
   - [x] Spotlight Setup
   - [x] Search Button Design
 - [x] Responsive Design Fix
+- [ ] Header : SNS Icons
 - [ ] SEO Setup
 - [ ] Comment (github)
 - [x] Deploy in Github Page 🚀
