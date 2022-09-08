@@ -1,15 +1,12 @@
-import { Box, Group, ScrollArea, Text, useMantineTheme } from '@mantine/core'
+import { Box, ScrollArea, Text, useMantineTheme } from '@mantine/core'
 import { IconFolder, IconTag } from '@tabler/icons'
 import { ALL_NOTES } from '../constants/notebook.constants'
 import { useNoteContext } from '../context/NoteContext'
 import { useSidebarContext } from '../context/SidebarContext'
 import extractTags from '../lib/extractTags'
 import { Resizable } from '../lib/layout-resizable'
-import MyIconAboutMe from './icons/MyIconAboutMe'
-import MyIconGithub from './icons/MyIconGithub'
-import MyIconInstagram from './icons/MyIconInstagram'
 
-export default function SideBar({ height }: { height: number }) {
+export default function SideBar() {
   const { totalNotes } = useNoteContext()
   const { saveSubSideBarLabel } = useSidebarContext()
   const tags = extractTags(totalNotes)
@@ -18,7 +15,7 @@ export default function SideBar({ height }: { height: number }) {
     <Resizable
       defaultSize={{
         width: 180,
-        height,
+        height: '100%',
       }}
       maxWidth={300}
       minWidth={110}
@@ -32,15 +29,12 @@ export default function SideBar({ height }: { height: number }) {
           borderRadius: theme.radius.sm,
           border: 'none',
           overflowY: 'scroll',
-          height: height,
-          [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
-            height: height - 80,
-          },
+          height: '100%',
         }}
       >
         <Box
           sx={{
-            marginBottom: 200,
+            marginBottom: 100,
           }}
         >
           <Text
@@ -127,20 +121,6 @@ export default function SideBar({ height }: { height: number }) {
             </Box>
           ))}
         </Box>
-        <Group
-          sx={{
-            width: '100%',
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            height: 40,
-          }}
-          position='center'
-        >
-          <MyIconAboutMe />
-          <MyIconGithub />
-          <MyIconInstagram />
-        </Group>
       </ScrollArea>
     </Resizable>
   )

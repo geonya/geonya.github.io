@@ -5,7 +5,7 @@ import { useSidebarContext } from '../context/SidebarContext'
 import useGetNotes from '../hooks/useGetNotes'
 import { Resizable } from '../lib/layout-resizable'
 
-export default function SubSideBar({ height }: { height: number }) {
+export default function SubSideBar() {
   const { toggleSideBar, subSideBarLabel, saveSubSideBarLabel } =
     useSidebarContext()
   const theme = useMantineTheme()
@@ -15,7 +15,7 @@ export default function SubSideBar({ height }: { height: number }) {
     <Resizable
       defaultSize={{
         width: 180,
-        height,
+        height: '100%',
       }}
       maxWidth={300}
       minWidth={110}
@@ -27,11 +27,8 @@ export default function SubSideBar({ height }: { height: number }) {
           backdropFilter: 'blur(4px)',
           borderRadius: theme.radius.sm,
           border: 'none',
-          height: height,
+          height: '100%',
           overflowY: 'scroll',
-          [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
-            height: height - 80,
-          },
         }}
       >
         <Box

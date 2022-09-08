@@ -19,7 +19,6 @@ import { SpotlightProvider } from '@mantine/spotlight'
 import MyIconAboutMe from './icons/MyIconAboutMe'
 import MyIconGithub from './icons/MyIconGithub'
 import MyIconInstagram from './icons/MyIconInstagram'
-import { wrap } from 'module'
 
 export default function Header() {
   const { toggleSideBar, sideBarShowing } = useSidebarContext()
@@ -28,14 +27,12 @@ export default function Header() {
   return (
     <Center
       sx={{
+        width: '100%',
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        zIndex: 888,
         height: 50,
-        [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
-          width: '100%',
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          zIndex: 888,
-        },
         backgroundColor: isDark
           ? theme.fn.rgba(theme.colors.dark[5], 1)
           : theme.colors.gray[1],
@@ -66,6 +63,7 @@ export default function Header() {
         <Grid.Col span={5}>
           <Group>
             <Text
+              mr={20}
               component={NextLink}
               href={'/'}
               sx={{
@@ -75,6 +73,9 @@ export default function Header() {
                 fontSize: theme.fontSizes.md,
                 [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
                   fontSize: theme.fontSizes.sm,
+                },
+                '&:hover': {
+                  opacity: 0.5,
                 },
               }}
               onClick={() => toggleSideBar(false)}

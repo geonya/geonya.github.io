@@ -13,6 +13,9 @@ interface ISidebarContext {
 
   subSideBarLabel: ISubSideBarLabel | null
   saveSubSideBarLabel: (label: ISubSideBarLabel | null) => void
+
+  sideBarHeight: number
+  saveSideBarHeight: (height: number) => void
 }
 interface SidebarContextProviderProps {
   children: ReactNode
@@ -34,6 +37,9 @@ export default function SidebarContextProiver({
 
   const saveSubSideBarLabel = (label: ISubSideBarLabel | null) =>
     setSubSideBarLabel(label)
+
+  const [sideBarHeight, setSideBarHeight] = useState(500)
+  const saveSideBarHeight = (height: number) => setSideBarHeight(height)
   return (
     <SidebarContext.Provider
       value={{
@@ -41,6 +47,8 @@ export default function SidebarContextProiver({
         toggleSideBar,
         subSideBarLabel,
         saveSubSideBarLabel,
+        sideBarHeight,
+        saveSideBarHeight,
       }}
     >
       {children}
