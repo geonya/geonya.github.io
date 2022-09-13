@@ -23,7 +23,6 @@ export default function MDX({ source, frontData }: MDXProps) {
     saveSubSideBarLabel({ type: 'tag', title: tagName })
   }
   const theme = useMantineTheme()
-
   const { classes, cx } = useStyles()
   const { width } = useViewportSize()
   return (

@@ -52,7 +52,7 @@
 
 - [x] Layout Width Bug fix
 - [ ] CreatedAt Date Type
-- [ ] 404 Page
+- [x] 404 Page
 - [x] Mobile View Optimization
 - [ ] Scroll Top Button
 - [ ]

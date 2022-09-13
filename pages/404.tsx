@@ -1,9 +1,25 @@
-import { Center, Text } from '@mantine/core'
+import { Box, Text } from '@mantine/core'
+import { GetStaticProps } from 'next'
+import useSaveTotalNotes from '../hooks/useSaveTotalNotes'
+import getTotalNotes from '../lib/getTotalNotes'
+import { PageProps } from '../types/types'
 
-export default function NotFound() {
+export const getStaticProps: GetStaticProps = async () => {
+  const totalNotes = getTotalNotes()
+  return {
+    props: {
+      totalNotes,
+    },
+  }
+}
+
+export default function NotFound({ totalNotes }: PageProps) {
+  useSaveTotalNotes(totalNotes)
   return (
-    <Center>
-      <Text>Page Not Found</Text>
-    </Center>
+    <Box mx='auto' sx={{ textAlign: 'center' }} mt={200}>
+      <Text sx={{ fontSize: 23, fontWeight: 600 }}>
+        404 Error : Page Not Found
+      </Text>
+    </Box>
   )
 }

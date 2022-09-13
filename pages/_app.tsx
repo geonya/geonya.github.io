@@ -8,7 +8,7 @@ import {
   ColorSchemeProvider,
   MantineProvider,
 } from '@mantine/core'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import GlobalStyles from '../styles/GlobalStyles'
 import myTheme from '../styles/myTheme'
 
@@ -16,37 +16,34 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [colorScheme, setColorScheme] = useState<ColorScheme>('dark')
   const toggleColorScheme = (value?: ColorScheme) =>
     setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'))
-
   return (
-    <>
-      <NoteContextProvider>
-        <SidebarContextProiver>
-          <Head>
-            <title>Geony Devnotes</title>
-            <meta name='description' content='Geony devnotes' />
-            <link rel='icon' href='/favicon.ico' />
-          </Head>
-          <ColorSchemeProvider
-            colorScheme={colorScheme}
-            toggleColorScheme={toggleColorScheme}
+    <NoteContextProvider>
+      <SidebarContextProiver>
+        <Head>
+          <title>Geony Devnotes</title>
+          <meta name='description' content='Geony devnotes' />
+          <link rel='icon' href='/favicon.ico' />
+        </Head>
+        <ColorSchemeProvider
+          colorScheme={colorScheme}
+          toggleColorScheme={toggleColorScheme}
+        >
+          <MantineProvider
+            withGlobalStyles
+            withNormalizeCSS
+            theme={{
+              colorScheme,
+              ...myTheme,
+            }}
           >
-            <MantineProvider
-              withGlobalStyles
-              withNormalizeCSS
-              theme={{
-                colorScheme,
-                ...myTheme,
-              }}
-            >
-              <GlobalStyles />
-              <Layout>
-                <Component {...pageProps} />
-              </Layout>
-            </MantineProvider>
-          </ColorSchemeProvider>
-        </SidebarContextProiver>
-      </NoteContextProvider>
-    </>
+            <GlobalStyles />
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </MantineProvider>
+        </ColorSchemeProvider>
+      </SidebarContextProiver>
+    </NoteContextProvider>
   )
 }
 
