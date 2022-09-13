@@ -1,7 +1,7 @@
 import { BackgroundImage, Container, useMantineTheme } from '@mantine/core'
 import { useElementSize } from '@mantine/hooks'
 import { NextPage } from 'next'
-import { useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 import { useSidebarContext } from '../context/SidebarContext'
 import useIsDark from '../hooks/useIsDark'
 import Footer from './Footer'
@@ -18,9 +18,11 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
   const isDark = useIsDark()
   const { ref, height } = useElementSize()
   const { saveSideBarHeight } = useSidebarContext()
-  useLayoutEffect(() => {
+
+  useEffect(() => {
     saveSideBarHeight(height)
   }, [height, saveSideBarHeight])
+
   return (
     <BackgroundImage src={'/images/base-background-img.jpeg'}>
       <Container
@@ -28,13 +30,14 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
         fluid
         p={0}
         sx={{
-          width: '100vw',
           height: '100vh',
           [`@media (min-width: ${theme.breakpoints.xl}px)`]: {
             width: theme.breakpoints.xl,
+            borderRadius: theme.radius.md,
           },
           [`@media (max-width: ${theme.breakpoints.xl}px)`]: {
             width: theme.breakpoints.xl,
+            borderRadius: theme.radius.md,
           },
           [`@media (max-width: ${theme.breakpoints.lg}px)`]: {
             width: theme.breakpoints.lg,
@@ -45,13 +48,12 @@ const Layout: NextPage<LayoutProps> = ({ children }) => {
           [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
             width: theme.breakpoints.sm,
           },
-          borderRadius: theme.radius.md,
-          border: `1px solid ${
-            isDark ? theme.colors.dark[4] : theme.colors.dark[0]
-          }`,
+
+          overflow: 'hidden',
           backgroundColor: isDark
             ? theme.fn.rgba(theme.colors.dark[5], 0.6)
             : theme.colors.gray[0],
+          position: 'relative',
         }}
       >
         <Header />

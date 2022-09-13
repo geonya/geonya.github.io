@@ -50,7 +50,10 @@
 - [x] Google Search Console
 - [x] Deploy in Github Page 🚀
 
-- [ ] Styles Classes Refactoring
+- [x] Layout Width Bug fix
 - [ ] CreatedAt Date Type
 - [ ] 404 Page
-- [ ] Mobile View Optimization
+- [x] Mobile View Optimization
+- [ ] Scroll Top Button
+- [ ]
+- [ ] Styles Classes Refactoring

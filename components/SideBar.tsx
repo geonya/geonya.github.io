@@ -65,7 +65,7 @@ export default function SideBar() {
               >
                 <IconFolder
                   size={20}
-                  style={{ flexShrink: 0, marginRight: 2 }}
+                  style={{ flexShrink: 0, marginRight: 10 }}
                 />
                 <Text
                   sx={{
@@ -107,7 +107,7 @@ export default function SideBar() {
                 marginBottom: 3,
               }}
             >
-              <IconTag size={20} style={{ flexShrink: 0, marginRight: 2 }} />
+              <IconTag size={20} style={{ flexShrink: 0, marginRight: 10 }} />
               <Text
                 sx={{
                   fontSize: theme.fontSizes.sm,

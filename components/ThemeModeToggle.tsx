@@ -23,7 +23,7 @@ const useStyles = createStyles((theme) => ({
 
   iconLight: {
     left: 4,
-    color: theme.white,
+    color: theme.colors.gray[2],
   },
 
   iconDark: {
@@ -37,7 +37,7 @@ export default function ThemeModeToggle() {
   const { classes, cx } = useStyles()
 
   return (
-    <Group position='center' my={30}>
+    <Group position='center'>
       <div className={classes.root}>
         <IconSun
           className={cx(classes.icon, classes.iconLight)}

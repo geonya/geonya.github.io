@@ -29,15 +29,15 @@ export default function MDX({ source, frontData }: MDXProps) {
   return (
     <Box
       px={20}
-      py={60}
+      py={80}
       mx='auto'
       sx={{
+        overflowX: 'hidden',
         height: '100%',
         width: theme.breakpoints.xs,
         whiteSpace: 'normal',
         [`@media (max-width: ${theme.breakpoints.xs}px)`]: {
           width: width || 380,
-          paddingTop: 80,
         },
       }}
     >

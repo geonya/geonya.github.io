@@ -28,14 +28,14 @@ export default function Header() {
     <Center
       sx={{
         width: '100%',
-        position: 'fixed',
+        position: 'absolute',
         top: 0,
         left: 0,
         zIndex: 888,
         height: 50,
         backgroundColor: isDark
           ? theme.fn.rgba(theme.colors.dark[5], 1)
-          : theme.colors.gray[1],
+          : theme.colors.gray[3],
       }}
       px={5}
     >

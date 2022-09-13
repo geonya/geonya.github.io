@@ -40,7 +40,7 @@ export default function Search() {
         borderRadius: theme.radius.md,
         cursor: 'pointer',
         border: `1px solid ${
-          isDark ? theme.colors.dark[3] : theme.colors.dark[0]
+          isDark ? theme.colors.dark[4] : theme.colors.gray[4]
         }`,
         '&:hover': {
           opacity: 0.5,

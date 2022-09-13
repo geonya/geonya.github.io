@@ -9,7 +9,7 @@ export default function SideBarWrapper() {
   return sideBarShowing ? (
     <Box
       sx={{
-        position: 'fixed',
+        position: 'absolute',
         top: 50,
         left: 0,
         display: 'flex',

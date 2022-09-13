@@ -10,7 +10,6 @@ export default function GlobalStyles() {
         },
         body: {
           overflowX: 'hidden',
-          position: 'relative',
           ...theme.fn.fontStyles(),
           fontSize: theme.fontSizes.md,
           lineHeight: theme.lineHeight,

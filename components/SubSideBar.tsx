@@ -63,7 +63,10 @@ export default function SubSideBar() {
             }}
             onClick={() => toggleSideBar()}
           >
-            <IconFileText size={18} style={{ flexShrink: 0, marginRight: 2 }} />
+            <IconFileText
+              size={18}
+              style={{ flexShrink: 0, marginRight: 10 }}
+            />
             <Text sx={{ fontSize: theme.fontSizes.xs }}>{note.title}</Text>
           </Text>
         ))}

@@ -22,13 +22,13 @@ export default function Footer() {
         height: 30,
         fontSize: theme.fontSizes.sm,
         width: '100%',
-        position: 'fixed',
+        position: 'absolute',
         bottom: 0,
         left: 0,
         zIndex: 888,
         backgroundColor: isDark
           ? theme.fn.rgba(theme.colors.dark[5], 1)
-          : theme.colors.gray[1],
+          : theme.colors.gray[3],
       }}
     >
       <Grid
